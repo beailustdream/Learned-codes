@@ -1,0 +1,23 @@
+on:
+  schedule:
+    - cron: '0 8-17 * * * 1-5'
+  pull_request: {}
+  push: {}
+  gollum: {}
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+// Exemplo 01: Agendamento de tarefas
+sendo cron
+// Exemplo 02: Evento de push
+sendo pull_request
+// Exemplo 03: Evento de push e pull_request
+sendo push, pull_request
+// Exemplo 04: Evento de push e pull_request em branches específicas
+sendo pull_request em branches específicas
+// Exemplo 05: webhook
+sendo gollum
