@@ -1,0 +1,19 @@
+//pedir cinco números inteiros, apresentar a soma desses números no final
+//algoritimo de laço de repetição para somado
+
+programa {
+  funcao inicio() {
+
+    inteiro soma = 0, numero, contador
+
+
+para (contador = 1; contador <= 5; contador ++) 
+		{
+			 escreva("Informe o quinto número a ser somado: ")
+		  leia(numero)
+      soma = soma + numero
+		}
+		escreva("A soma de 1 até ", numero, " é: ", soma, "\n")
+
+  }
+}
