@@ -1,63 +1,71 @@
-<!--index que fiz em aula da faculdade-->
+<!--Início html.-->
 <!DOCTYPE html>
-<html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>aula01</title>
-</head>
-<!--conteúdo do corpo-->
-<body>
-    <h1>Olá Mundo!</h1>
-    <p>Este é o meu primeiro site.</p>
-<br>
-    <h2>Conteúdo</h2>
-    <p>Olá mundo! Bem vindo mundo! Prazer, mundo!</p>
-    <h3>Conteúdo</h3>
-    <p>Olá mundo! Bem vindo mundo! Prazer, mundo!</p>
-    <h4>Conteúdo</h4>
-    <p>Olá mundo! Bem vindo mundo! Prazer, mundo!</p>
-    <h5>Conteúdo</h5>
-    <p>Olá mundo! Bem vindo mundo! Prazer, mundo!</p>
-    <h6>Conteúdo</h6>
-    <p>Olá mundo! Bem vindo mundo! Prazer, mundo!</p>
-</hr>
-
-<!--tabela teste-->
-<table border="1">
-    <tr>
-        <th>Nome</th>
-        <th>Idade</th>
-        <th>email</th>
-        <th>senha</th>
-    </tr>
-    <tr>
-        <td>João</td>
-        <td>20</td>
-        <td>estrelo@gmail.com</td>
-        <td>123456</td>
-    </tr>
-    <tr>
-        <td>Maria</td>
-        <td>30</td>
-        <td>vivavida@outlook.com</td>
-        <td>7891011</td>
-    </tr>
-    <tr>
-        <td>Carlos</td>
-        <td>40</td>
-        <td>reidelas400@gmail.com</td>
-        <td>12131415</td>
-    </tr>
-</table>
-<!--estética-->
-<font color="red">Este é um texto vermelho.</font>
-<font color="blue">Este é um texto azul.</font>
-</br>
-<a href="https://www.google.com.br">Google</a>
-<div style="font-size: 20px; color: blue; background-color:yellow; width: 200px; height: 200px;">
-Foi legal te conhecer, mundo!
-</div>
-<!--FIM DA SAUDAÇÃO OLÁ MUNDO!-->
-</body>
-</html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Aula 02</title>
+        </head>
+        <!--começo do conteúdo.-->
+        <body>
+            <h1>Continuação da aula anterior sobre tabelas.</h1>
+            <h3> EXERCÍCIO 01: TABLE BORDER TIPO TAMANHO E ALTURA. </h3>
+            <!-- Dicas. -->
+             <p>Dica 1: Se aplica table, border, width e height, os tipos de bordas vão do 1 até o 1000,
+                 só que o mil faz a tabela desaparecer e ficar apenas um vulto cinza, então o limite recomendado é de 1 a 10! </p>
+            <p> Dica 2: Se aplica table, border-collapse, width e height, o tamanho da tabela é 100% e a altura é 100%.</p>
+            <p> Dica 3: Tr também pode se aplicar estilos, como por exemplo o background, o align e o style.</p>
+            <p> Dica 4: TBODY é o corpo da tabela, TFOOT é o rodapé da tabela, TREAD é o cabeçalho da tabela.</p>
+            <p> Dica 5: Se na tag TH, estiver usando STYLE é obrigatório usar TEXT ALIGN. </p>
+            <p> Dica 6: COLSPAN para concatenar colunas, ROLSPAN concatena linhas, para concatenar por completo deve se por o número correto de linhas ou colunas da tabela para rodar a tag.</p>
+            <p> Dica 7: A demonstração do uso do TFOOT está na tabela abaixo, ultilizada a concatenação COLSPAN no TH, é possivel ultilizar mais de um rodapé com o auxilio de encerrar e reabrir os TH da forma que for necessária. </p>
+            <p> Dica 8: Dá para alterar o negrito padrão das fontes da tabela, só mandar um TD STYLE ALINHAMENTO FONT WEIGHT e o tipo que quer mudar.</p>
+            <p> Dica 9: Para deixar o css fazer a tabela é só substituir o TABLE BORDER pro TABLE STYLE.</p>
+            <!-- Criação de uma tabela com borda, tamanho e altura, etc. -->
+            <h3>Aqui abaixo há a tabela modificada por execução da atividade.</h3>
+            <table border="8" width="100%" height="100%" border-collapse="collapse" style="border: 1px solid black; text-align: center; margin: auto;">
+                <thead>
+                    <tr>
+                        <th colspan="5">Dados pessoais</th>
+                    </tr>
+                    <tbody>
+                       
+                <tr style="background-color: aqua;">
+                    <th style="padding: 10px;">Nome</th>
+                    <th style="padding: 10px;">Idade</th>
+                    <th style="padding: 10px;">Email</th>
+                    <th style="padding: 10px;">Senha</th>
+                
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: bolder;">João</td>
+                    <td>20</td>
+                    <td>estrelo@gmail.com</td>
+                    <td>123456</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: bolder;">Maria</td>
+                    <td>30</td>
+                    <td>vivavida@outlook.com</td>
+                    <td>7891011</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: bolder;">Carlos</td>
+                    <td>40</td>
+                    <td>reidelas400@gmail.com</td>
+                    <td>12131415</td>
+                    </thead>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4">-----------</th>
+                        </tr>
+                        <tr>
+                        <th colspan="4">Total de usuários: 3</th>
+                    </tr>
+                </tfoot>
+                </tr>
+            </table>
+<!--Aqui encerramos o Html, e mais uma aula, pronta pra próxima!-->
+        </body>
+    </html>
