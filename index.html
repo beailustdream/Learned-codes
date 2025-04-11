@@ -1,71 +1,87 @@
-<!--Início html.-->
 <!DOCTYPE html>
 <html lang="pt-br">
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Aula 02</title>
-        </head>
-        <!--começo do conteúdo.-->
-        <body>
-            <h1>Continuação da aula anterior sobre tabelas.</h1>
-            <h3> EXERCÍCIO 01: TABLE BORDER TIPO TAMANHO E ALTURA. </h3>
-            <!-- Dicas. -->
-             <p>Dica 1: Se aplica table, border, width e height, os tipos de bordas vão do 1 até o 1000,
-                 só que o mil faz a tabela desaparecer e ficar apenas um vulto cinza, então o limite recomendado é de 1 a 10! </p>
-            <p> Dica 2: Se aplica table, border-collapse, width e height, o tamanho da tabela é 100% e a altura é 100%.</p>
-            <p> Dica 3: Tr também pode se aplicar estilos, como por exemplo o background, o align e o style.</p>
-            <p> Dica 4: TBODY é o corpo da tabela, TFOOT é o rodapé da tabela, TREAD é o cabeçalho da tabela.</p>
-            <p> Dica 5: Se na tag TH, estiver usando STYLE é obrigatório usar TEXT ALIGN. </p>
-            <p> Dica 6: COLSPAN para concatenar colunas, ROLSPAN concatena linhas, para concatenar por completo deve se por o número correto de linhas ou colunas da tabela para rodar a tag.</p>
-            <p> Dica 7: A demonstração do uso do TFOOT está na tabela abaixo, ultilizada a concatenação COLSPAN no TH, é possivel ultilizar mais de um rodapé com o auxilio de encerrar e reabrir os TH da forma que for necessária. </p>
-            <p> Dica 8: Dá para alterar o negrito padrão das fontes da tabela, só mandar um TD STYLE ALINHAMENTO FONT WEIGHT e o tipo que quer mudar.</p>
-            <p> Dica 9: Para deixar o css fazer a tabela é só substituir o TABLE BORDER pro TABLE STYLE.</p>
-            <!-- Criação de uma tabela com borda, tamanho e altura, etc. -->
-            <h3>Aqui abaixo há a tabela modificada por execução da atividade.</h3>
-            <table border="8" width="100%" height="100%" border-collapse="collapse" style="border: 1px solid black; text-align: center; margin: auto;">
-                <thead>
-                    <tr>
-                        <th colspan="5">Dados pessoais</th>
-                    </tr>
-                    <tbody>
-                       
-                <tr style="background-color: aqua;">
-                    <th style="padding: 10px;">Nome</th>
-                    <th style="padding: 10px;">Idade</th>
-                    <th style="padding: 10px;">Email</th>
-                    <th style="padding: 10px;">Senha</th>
-                
-                </tr>
-                <tr>
-                    <td style="text-align: center; font-weight: bolder;">João</td>
-                    <td>20</td>
-                    <td>estrelo@gmail.com</td>
-                    <td>123456</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; font-weight: bolder;">Maria</td>
-                    <td>30</td>
-                    <td>vivavida@outlook.com</td>
-                    <td>7891011</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; font-weight: bolder;">Carlos</td>
-                    <td>40</td>
-                    <td>reidelas400@gmail.com</td>
-                    <td>12131415</td>
-                    </thead>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="4">-----------</th>
-                        </tr>
-                        <tr>
-                        <th colspan="4">Total de usuários: 3</th>
-                    </tr>
-                </tfoot>
-                </tr>
-            </table>
-<!--Aqui encerramos o Html, e mais uma aula, pronta pra próxima!-->
-        </body>
-    </html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AULA 03</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <header style="padding: 20px; text-align: center; background-color: rgb(149, 181, 226);">
+        <nav>
+            <a href="#sobre">Sobre</a>
+            <a href="#valores">Valores</a>
+            <a href="#formulario">Contato</a>
+        </nav>
+    </header>
+    <main style="background-color: rgb(149, 181, 226);">
+        <article style="text-align: center;">
+            <img width="200px" src="https://i.pinimg.com/736x/73/30/12/733012da70573f8f3a96fd2aa877a616.jpg" alt="Logo da empresa">
+        </article>
+        <h1 style="text-align: center;">CLOUD STAR</h1>
+        <section>
+        </section>
+    <div id="sobre" style="padding: 30px; text-align: center; background-color: rgb(155, 186, 214);">
+        <table>
+            <tr>
+                <td rowspan="2">
+                </td>
+            </tr>
+            </tr>
+        </table>
+        
+    </div>
+    <hr />
+    <div id="valores" style="padding: 30px; background-color: rgb(152, 186, 240);">
+        <h1 style="text-align: center;">Valores</h1>
+        <table border="1" style="margin: 0 auto;">
+            <tr >
+                <th style="padding: 20px;">Serviço</th>
+                <th style="padding: 20px;">Valor</th>
+            </tr>
+            <tr>
+                <td style="padding: 20px;">BackEnd</td>
+                <td style="padding: 20px;">10.000,00R$</td>
+            </tr>
+            <tr>
+                <td style="padding: 20px;">FrontEnd</td>
+                <td style="padding: 20px;">25.000,00R$</td>
+            </tr>
+            <tr>
+                <td style="padding: 20px;">Cloud Computing</td>
+                <td style="padding: 20px;">10.000,00R$</td>
+            </tr>
+            <tr>
+                <td style="padding: 20px;">Big Data</td>
+                <td style="padding: 20px;">25.000,00R$</td>
+            </tr>
+            <tr>
+                <td style="padding: 20px;">Inteligência Artificial</td>
+                <td style="padding: 20px;">25.000,00R$</td>
+            </tr>
+        </table>
+    </div>
+    <hr />
+    <div id="formulario" style="padding: 30px; background-color: rgb(95, 138, 182);">
+        <h3 style="text-align: center;">Se interessou? Entre em contato conosco!</h3>
+        <form style="text-align: center;" action="">
+            <label for="">Nome</label><br/>
+            <input type="text"><br/><br/>
+            <label for="">E-mail</label><br/>
+            <input type="text"><br/><br/>
+            <label for="">Celular</label><br/>
+            <input type="text"><br/><br/>
+            <input style="padding: 10px;" type="submit"><br/><br/>
+    </div>
+    <div style="padding: 30px; text-align: center; background-color: rgb(99, 149, 231);">
+        <h3>Beatriz Gonçalves</h3>
+        <p>Aula 10/04/25</p>
+    </div>
+</body>
+</html>
+
