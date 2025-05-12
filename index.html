@@ -1,31 +1,236 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AULA 24/04/25</title>
-    <!--Duas formas de estilo: Classes em quadrados-->
+    <title>Portifólio</title>
     <style>
-.bloco-azul {
-    width: 200px;
-    height: 200px;
-    background-color: rgb(71, 117, 185);
-}
-.bloco-vermelho {
-    width: 200px;
-    height: 200px;
-    background-color: red;
-}
-    </style>   
+         .container {
+      display: flex;
+      align-items: center; 
+    }
+
+    .logo {
+      width: 80px; 
+    }
+
+    .texto {
+      margin-left: 20px; 
+    }
+
+         body {
+      font-family: Georgia, serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    header {
+      background-color: #004080;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+    nav {
+      background-color: #003366;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      background-color: #004080;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+      margin: 0 px;
+    }
+        section {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      border-bottom: 1px solid #003366;
+      padding-bottom: 5px;
+    }
+    p {
+      text-indent: 2em;     /* Recuo na primeira linha */
+      margin-bottom: 1.5em; /* Espaço entre parágrafos */
+    }
+    .banner-image {
+      width: 100%;
+    }
+    #formulario {
+      padding: 30px;
+      background-color: rgb(255, 255, 255);
+    }
+    .centered-text {
+      text-align: center;
+    }
+
+    h3.centered-text {
+      text-align: center;
+    }
+
+    .centered-form {
+      text-align: center;
+    }
+
+    form.centered-form {
+      text-align: center;
+    }
+
+    .centered-form {
+      text-align: center;
+    }
+
+    .centered-text {
+      text-align: center;
+    }
+    .submit-button {
+      padding: 10px;
+    }
+
+    #formulario {
+      padding: 30px;
+      background-color: rgb(255, 255, 255);
+    }
+      .centered-heading {
+          text-align: center;
+          font-size: 24px;
+      }
+       .portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .portfolio-item {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .portfolio-item p {
+      padding: 10px;
+      text-align: center;
+      background: #f9f9f9;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-    <div class="bloco-vermelho">
-        <p>Teste de parágrafo.</p>
-        <h1>AULA DE CSS</h1>
-        <p>Teste incorporado.</p>
+<div class="container">
+    <div class="texto">
+      <img src="https://i.postimg.cc/hjbQ7NGB/Banner-para-E-commerce-Nova-cole-o-Minimalista-1.png" alt="Banner do site" class="banner-image">
     </div>
-    <div class="bloco-azul">
-        <p>Teste de parágrafo.</p>
-        <h1>AULA DE CSS</h1>
-        <p>Teste incorporado.</p>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#Sobre">Sobre</a></li>
+      <li><a href="#Habilidades">Habilidades</a></li>
+      <li><a href="#Portifólio">Portifólio</a></li>
+      <li><a href="#Contato">Contato</a></li>
+    </ul>
+  </nav>
+  <section id="Sobre">
+     <div class="container">
+    <img src="https://i.postimg.cc/mkZQ8Tcj/9b3aaa767575d6fd7ce1a1ba1494f10f-removebg-preview.png" alt="logo" class="logo">
+    <div class="texto">
+      <h1>Quem sou eu?</h1>
+    <p>Sou desenvolvedora de software com experiência em análise, design e construção de aplicações escaláveis e eficientes. Ao longo da minha carreira, trabalhei em projetos web, desktop e mobile, utilizando tecnologias modernas e boas práticas de desenvolvimento. Tenho paixão por resolver problemas complexos por meio da programação, sempre buscando soluções limpas, seguras e de alto desempenho.
+
+Valorizo o trabalho em equipe, a comunicação clara e o aprendizado contínuo. Acredito que o código bem escrito é aquele que entrega valor real para o usuário e pode ser mantido com confiança. Tenho familiaridade com metodologias ágeis, versionamento com Git e integração contínua, além de atuar com testes automatizados e arquitetura de software.
+
+Meu objetivo é contribuir com projetos que impactem positivamente a vida das pessoas e continuar evoluindo como profissional.</p>
+  
+  </section>
+  <section id="Habilidades">
+    <div class="container">
+    <img src="https://i.postimg.cc/8PKTkvv4/7f33c93d2245743c9a539340788ad4b2-removebg-preview.png" alt="logo" class="logo">
+    <div class="texto">
+    <h2>Habilidades</h2>
+  <ul>
+    <li>Lógica de programação: pensar de forma estruturada e resolver problemas passo a passo.</li>
+    <li>Linguagens de programação: como Python, Java, JavaScript, C#, etc.</li>
+    <li>Versionamento de código: saber usar Git e GitHub.</li>
+    <li>Estruturas de dados e algoritmos: para escrever código eficiente e organizado.</li>
+    <li>Banco de dados: uso de SQL (MySQL, PostgreSQL) e NoSQL (MongoDB).</li>
+    <li>Desenvolvimento Web: HTML, CSS, JavaScript, e frameworks como React ou Angular.</li>
+    <li>Testes de software: escrever testes unitários, de integração e automação.</li>
+    <li>APIs: entender e usar APIs RESTful.</li>
+    <li>Controle de qualidade e debugging: saber encontrar e corrigir erros.</li>
+    <li>Conhecimento de sistemas operacionais: como Linux e Windows.</li>
+    <li>Arquitetura de software: princípios como MVC, camadas, e boas práticas de design.</li>
+  </ul>
+  </section>
+  <section id="Portifólio">
+    <div class="portfolio">
+       <div class="texto">
+    <h2>Portifólio</h2>
+    <div class="portfolio-item">
+      <img src="https://i.postimg.cc/Z5QT7KP4/Tradutor-de-zumbis.png" alt="Projeto 1">
     </div>
+    <div class="portfolio-item">
+      <img src="https://i.postimg.cc/nckJP89R/Tradutor-de-zumbis-1.png" alt="Projeto 2">
+    </div>
+    <div class="portfolio-item">
+      <img src="https://i.postimg.cc/6QvwzMsY/Tradutor-de-zumbis-2.png" alt="Projeto 3">
+    </div>
+    <div class="portfolio-item">
+      <img src="https://i.postimg.cc/rwBwrQQC/Tradutor-de-zumbis-3.png" alt="Projeto 4">
+    </div>
+    <div class="portfolio-item">
+      <img src="https://i.postimg.cc/7ZMgsGdz/Tradutor-de-zumbis-4.png" alt="Projeto 5">
+    </div>
+    <div class="portfolio-item">
+      <img src="https://i.postimg.cc/q7zmYqvB/Tradutor-de-zumbis-6.png" alt="Projeto 6">
+    </div>
+
+  </section>
+  <section id="Contato">
+    <div class="container">
+        <form class="centered-form" action="">
+        <h4 class="centered-heading">Se interessou? Entre em contato pelas redes sociais ou pelo formulário abaixo!</h4>
+  <hr />
+    <div id="formulario">
+        <form style="text-align: center;" action="">
+            <label for="">Nome</label><br/>
+            <input type="text" placeholder="Digite aqui"><br/><br/>
+            <label for="">E-mail</label><br/>
+            <input type="text" placeholder="Digite aqui"><br/><br/>
+            <label for="">Celular</label><br/>
+            <input type="text" placeholder="Digite seu celular" title="Digite seu celular"><br/><br/>
+            <input class="submit-button" type="submit"><br/><br/>
+    </div>
+ <footer>
+    &copy; Beatriz Gonçalves da Silva, 2025. Todos os direitos reservados.
+  </footer>
+</body>
+</html>
