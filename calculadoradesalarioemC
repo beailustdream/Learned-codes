@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Protótipos
+void menu();
+float calcularSalarioBruto(float salarioBase, float valorHoraExtra, int horasExtras);
+float calcularDescontos(float salarioBruto, float descontoPercentual);
+float calcularSalarioFinal(float salarioBruto, float desconto, float bonus);
+
+// Função principal
+int main() {
+    menu();
+    return 0;
+}
+
+// Função menu
+void menu() {
+    float salarioBase, valorHoraExtra, descontoPercentual, bonus;
+    int horasExtras;
+
+    printf("=== CALCULADORA DE SALARIO ===\n");
+
+    // Entradas do usuário
+    printf("Digite o salario base: R$ ");
+    scanf("%f", &salarioBase);
+
+    printf("Digite o valor da hora extra: R$ ");
+    scanf("%f", &valorHoraExtra);
+
+    printf("Digite a quantidade de horas extras: ");
+    scanf("%d", &horasExtras);
+
+    printf("Digite o percentual de desconto (ex: 11 para 11%%): ");
+    scanf("%f", &descontoPercentual);
+
+    printf("Digite o valor de bonus ou adicional (se nenhum, digite 0): R$ ");
+    scanf("%f", &bonus);
+
+    // Cálculos
+    float salarioBruto = calcularSalarioBruto(salarioBase, valorHoraExtra, horasExtras);
+    float desconto = calcularDescontos(salarioBruto, descontoPercentual);
+    float salarioFinal = calcularSalarioFinal(salarioBruto, desconto, bonus);
+
+    // Resultados
+    printf("\nSalario Bruto: R$ %.2f", salarioBruto);
+    printf("\nDesconto: R$ %.2f", desconto);
+    printf("\nBonus: R$ %.2f", bonus);
+    printf("\n>>> Salario Final: R$ %.2f\n", salarioFinal);
+
+    system("pause");
+}
+
+// Função para calcular salário bruto
+float calcularSalarioBruto(float salarioBase, float valorHoraExtra, int horasExtras) {
+    return salarioBase + (valorHoraExtra * horasExtras);
+}
+
+// Função para calcular descontos
+float calcularDescontos(float salarioBruto, float descontoPercentual) {
+    return salarioBruto * (descontoPercentual / 100);
+}
+
+// Função para calcular salário final
+float calcularSalarioFinal(float salarioBruto, float desconto, float bonus) {
+    return salarioBruto - desconto + bonus;
+}
