@@ -8,7 +8,6 @@
       display: flex;
       align-items: center; 
     }
-
     .logo {
       width: 80px; 
     }
@@ -120,28 +119,24 @@
           text-align: center;
           font-size: 24px;
       }
-       .portfolio {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+        .portfolio {
+      display: flex;
+      flex-wrap: wrap;       /* Quebra para nova linha se não couber */
+      gap: 15px;             /* Espaço entre as imagens */
+      justify-content: center;
     }
 
-    .portfolio-item {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    .portfolio img {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;     /* Corta ou preenche a imagem para encaixar */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
     }
 
-    .portfolio-item img {
-      width: 100%;
-      display: block;
-    }
-
-    .portfolio-item p {
-      padding: 10px;
-      text-align: center;
-      background: #f9f9f9;
-      margin: 0;
+    .portfolio img:hover {
+      transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
     }
   </style>
 </head>
@@ -191,9 +186,13 @@ Meu objetivo é contribuir com projetos que impactem positivamente a vida das pe
   </ul>
   </section>
   <section id="Portifólio">
-    <div class="portfolio">
-       <div class="texto">
-    <h2>Portifólio</h2>
+  <div class="container">
+    <img src="https://i.postimg.cc/8PKTkvv4/7f33c93d2245743c9a539340788ad4b2-removebg-preview.png" alt="logo" class="logo">
+    <div class="texto">
+      <h2>Portfólio</h2>
+    </div>
+  </div>
+  <div class="portfolio">
     <div class="portfolio-item">
       <img src="https://i.postimg.cc/Z5QT7KP4/Tradutor-de-zumbis.png" alt="Projeto 1">
     </div>
@@ -212,8 +211,8 @@ Meu objetivo é contribuir com projetos que impactem positivamente a vida das pe
     <div class="portfolio-item">
       <img src="https://i.postimg.cc/q7zmYqvB/Tradutor-de-zumbis-6.png" alt="Projeto 6">
     </div>
-
-  </section>
+  </div>
+</section>
   <section id="Contato">
     <div class="container">
         <form class="centered-form" action="">
