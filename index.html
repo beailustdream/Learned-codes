@@ -1,235 +1,621 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portifólio</title>
-    <style>
-         .container {
-      display: flex;
-      align-items: center; 
-    }
-    .logo {
-      width: 80px; 
-    }
-
-    .texto {
-      margin-left: 20px; 
-    }
-
-         body {
-      font-family: Georgia, serif;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghoulia Yelps - Portifólio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap');
+    body {
       margin: 0;
-      padding: 0;
-      background-color: #ffffff;
-      color: #333;
+     font-family: "WDXL Lubrifont TC", sans-serif;
+     font-weight: 400;
+     font-style: normal;
+      background: #000;
+      color: white;
+    }
+html {
+  scroll-behavior: smooth;
+}
+    header {
+      background: #020511;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    header {
-      background-color: #004080;
-      color: white;
-      padding: 10px;
-      text-align: center;
+    .logo {
+        width: 150px;
     }
     nav {
-      background-color: #003366;
-      padding: 10px;
-    }
-
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
       display: flex;
+      align-items: right;
+      justify-content: flex-end;
+    }
+    nav a {
+        width: auto;
+        padding: 6px 6px;
+         display: flex;
+        font-size: 18px;
+      margin-left: 20px;
+      color: #fff;
+      text-decoration:  none;
+    }
+
+    .banner {
+      background: url('https://i.postimg.cc/c1z1CDS7/7f.gif') no-repeat center;
+      background-size: cover;
+      height: 80vh;
+      display: flex;
+      align-items: center;
       justify-content: center;
-    }
-
-    nav ul li {
-      margin: 0 15px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      background-color: #004080;
-      color: white;
       text-align: center;
+    }
+
+    .banner h1 {
+      background: rgba(0, 0, 0, 0.6);
       padding: 20px;
-      margin-top: 20px;
-      margin: 0 px;
-    }
-        section {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 20px;
+      font-size: 36px;
     }
 
-    h2 {
-      border-bottom: 1px solid #003366;
-      padding-bottom: 5px;
-    }
-    p {
-      text-indent: 2em;     /* Recuo na primeira linha */
-      margin-bottom: 1.5em; /* Espaço entre parágrafos */
-    }
-    .banner-image {
-      width: 100%;
-    }
-    #formulario {
-      padding: 30px;
-      background-color: rgb(255, 255, 255);
-    }
-    .centered-text {
+    .container {
+      max-width: 1200px;
+      padding: 40px 20px;
       text-align: center;
     }
+    .sobre {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 40px 20px;
+  text-align: center;
+}
 
-    h3.centered-text {
-      text-align: center;
-    }
+.sobre h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
 
-    .centered-form {
-      text-align: center;
-    }
+.sobre p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.sobre {
+  background-color: #040718;
+  color: #ffffff;
+  padding: 40px 20px;
+}
 
-    form.centered-form {
-      text-align: center;
-    }
+.sobre h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
 
-    .centered-form {
-      text-align: center;
-    }
+.conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px; 
+  max-width: 800px;
+  margin: 0 auto;
+  flex-wrap: wrap; 
+}
 
-    .centered-text {
-      text-align: center;
-    }
-    .submit-button {
-      padding: 10px;
-    }
+.foto-perfil {
+    align-items: left;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-    #formulario {
-      padding: 30px;
-      background-color: rgb(255, 255, 255);
-    }
-      .centered-heading {
-          text-align: center;
-          font-size: 24px;
-      }
-        .portfolio {
+.conteudo p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 500px;
+}
+.habilidades {
+  background-color: #040718;
+  color: #ffffff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.habilidades h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.habilidades ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.habilidades li {
+  background-color: #fff;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+.portfolio {
+  background-color: #020511;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.portfolio h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.projetos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.projeto {
+  background: #020511;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 300px;
+}
+
+.projeto img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.projeto h3 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.projeto p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.projeto a {
+  text-decoration: none;
+  background-color: #020511;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.projeto a:hover {
+  background-color: #020511;
+}
+.contato {
+  background-color: #020511;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.contato h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.contato form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contato input,
+.contato textarea {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contato button {
+  background-color: #760b0b;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.contato button:hover {
+  background-color: #444;
+}
+.contato label {
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.obrigatorio {
+  color: red;
+  margin-left: 4px;
+}
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.avaliacoes {
+  background-color: #020511;
+  padding: 50px 20px;
+  text-align: center;
+   opacity: 0;
+  transform: translateY(50px);
+  animation: aparecer 1s ease-out forwards;
+}
+
+.avaliacoes h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.cards-avaliacoes {
+    animation-delay: 0.2s;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.card {
+    animation-delay: 0.2s;
+  background-color: #581e1e;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  max-width: 300px;
+  text-align: center;
+}
+
+.card img {
+    animation-delay: 0.2s;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.estrelas {
+    animation-delay: 0.2s;
+  font-size: 18px;
+  color: #ffc107; /* amarelo dourado */
+  margin-bottom: 15px;
+}
+
+.card p {
+    animation-delay: 0.2s;
+  font-style: italic;
+  font-size: 16px;
+}
+
+.card h4 {
+    animation-delay: 0.2s;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+}
+.lista-habilidades {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.habilidade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.habilidade:hover {
+  transform: translateY(-5px);
+}
+
+.habilidade img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.habilidade p {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+}
+     .redes-sociais {
       display: flex;
-      flex-wrap: wrap;       /* Quebra para nova linha se não couber */
-      gap: 15px;             /* Espaço entre as imagens */
       justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
     }
 
-    .portfolio img {
-      width: 300px;
-      height: 200px;
-      object-fit: cover;     /* Corta ou preenche a imagem para encaixar */
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+    .redes-sociais a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      overflow: hidden;
+      transition: background-color 0.3s;
     }
 
-    .portfolio img:hover {
-      transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    .redes-sociais a:hover {
+      background-color: #0077b5;
+    }
+
+    .redes-sociais img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+      footer {
+      background: #020511;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #ccc;
+      text-decoration: none;
     }
   </style>
 </head>
+</head>
 <body>
-<div class="container">
-    <div class="texto">
-      <img src="https://i.postimg.cc/hjbQ7NGB/Banner-para-E-commerce-Nova-cole-o-Minimalista-1.png" alt="Banner do site" class="banner-image">
-    </div>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="#Sobre">Sobre</a></li>
-      <li><a href="#Habilidades">Habilidades</a></li>
-      <li><a href="#Portifólio">Portifólio</a></li>
-      <li><a href="#Contato">Contato</a></li>
-    </ul>
-  </nav>
-  <section id="Sobre">
-     <div class="container">
-    <img src="https://i.postimg.cc/mkZQ8Tcj/9b3aaa767575d6fd7ce1a1ba1494f10f-removebg-preview.png" alt="logo" class="logo">
-    <div class="texto">
-      <h1>Quem sou eu?</h1>
-    <p>Sou desenvolvedora de software com experiência em análise, design e construção de aplicações escaláveis e eficientes. Ao longo da minha carreira, trabalhei em projetos web, desktop e mobile, utilizando tecnologias modernas e boas práticas de desenvolvimento. Tenho paixão por resolver problemas complexos por meio da programação, sempre buscando soluções limpas, seguras e de alto desempenho.
+  <header>
+    <img src="https://i.postimg.cc/hG4DGHNP/Desenvolvedora-de-Software-1-Photoroom-2.png" alt="logo" class="logo">
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#portifolio">Portifólio</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
 
-Valorizo o trabalho em equipe, a comunicação clara e o aprendizado contínuo. Acredito que o código bem escrito é aquele que entrega valor real para o usuário e pode ser mantido com confiança. Tenho familiaridade com metodologias ágeis, versionamento com Git e integração contínua, além de atuar com testes automatizados e arquitetura de software.
+  <section class="banner">
+     </section>
 
-Meu objetivo é contribuir com projetos que impactem positivamente a vida das pessoas e continuar evoluindo como profissional.</p>
-  
+  <section class="sobre" id="sobre">
+    <div class="conteudo">
+     <img src="https://i.postimg.cc/vHr8DVd8/2f5159e6fdbe14d98dbdb7d4ebc840d9-removebg-preview-1.png" alt="Foto de perfil" class="foto-perfil">
+     </div>
+    <h2>Sobre Mim</h2>
+    <p>Sou desenvolvedora de software com experiência em análise, design e construção de aplicações escaláveis e eficientes. Ao longo da minha carreira, trabalhei em projetos web, desktop e mobile, utilizando tecnologias modernas e boas práticas de desenvolvimento. Tenho paixão por resolver problemas complexos por meio da programação, sempre buscando soluções limpas, seguras e de alto desempenho. Valorizo o trabalho em equipe, a comunicação clara e o aprendizado contínuo. Acredito que o código bem escrito é aquele que entrega valor real para o usuário e pode ser mantido com confiança. Tenho familiaridade com metodologias ágeis, versionamento com Git e integração contínua, além de atuar com testes automatizados e arquitetura de software. Meu objetivo é contribuir com projetos que impactem positivamente a vida de monstros e normies, e continuar evoluindo como profissional.</p>
   </section>
-  <section id="Habilidades">
-    <div class="container">
-    <img src="https://i.postimg.cc/8PKTkvv4/7f33c93d2245743c9a539340788ad4b2-removebg-preview.png" alt="logo" class="logo">
-    <div class="texto">
-    <h2>Habilidades</h2>
-  <ul>
-    <li>Lógica de programação: pensar de forma estruturada e resolver problemas passo a passo.</li>
-    <li>Linguagens de programação: como Python, Java, JavaScript, C#, etc.</li>
-    <li>Versionamento de código: saber usar Git e GitHub.</li>
-    <li>Estruturas de dados e algoritmos: para escrever código eficiente e organizado.</li>
-    <li>Banco de dados: uso de SQL (MySQL, PostgreSQL) e NoSQL (MongoDB).</li>
-    <li>Desenvolvimento Web: HTML, CSS, JavaScript, e frameworks como React ou Angular.</li>
-    <li>Testes de software: escrever testes unitários, de integração e automação.</li>
-    <li>APIs: entender e usar APIs RESTful.</li>
-    <li>Controle de qualidade e debugging: saber encontrar e corrigir erros.</li>
-    <li>Conhecimento de sistemas operacionais: como Linux e Windows.</li>
-    <li>Arquitetura de software: princípios como MVC, camadas, e boas práticas de design.</li>
-  </ul>
-  </section>
-  <section id="Portifólio">
-  <div class="container">
-    <img src="https://i.postimg.cc/8PKTkvv4/7f33c93d2245743c9a539340788ad4b2-removebg-preview.png" alt="logo" class="logo">
-    <div class="texto">
-      <h2>Portfólio</h2>
+  <section class="habilidades" id="habilidades">
+  <h2>Habilidades</h2>
+  <div class="lista-habilidades">
+    
+    <div id="habilidades" class="habilidade">
+      <img src="https://i.postimg.cc/vZWVrpYd/cpplogo-460x460.webp" alt="C++">
+      <p>C++</p>
     </div>
+
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/vZq1M9vc/python-programming-language-icon-c47daf.webp" alt="Python">
+      <p>Python</p>
+    </div>
+
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/J4dmzQ9V/java-logo.png" alt="Java">
+      <p>Java</p>
+    </div>
+
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/mgNvFNng/images.png" alt="C#">
+      <p>C#</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/C578q2b4/img-icons8.png" alt="C">
+      <p>C</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/XqBMZRRR/png-transparent-web-development-php-web-application-development-software-development-php-miscellaneo.png" alt="PHP">
+      <p>PHP</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/Wb487mt4/git-2.webp" alt="Git">
+      <p>Git</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/hGK1f9Fg/images.jpg" alt="Ruby">
+      <p>RUBY</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/TYYyLC1t/i379792-1-jpeg.webp" alt="Cobol">
+      <p>Cobol</p>
+    </div>
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/mg7GbG4J/Lua-Logo.png" alt="Lua">
+      <p>Lua</p>
+    </div>
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/J0KSy104/DSFW.png" alt="JavaScript">
+      <p>JavaScript</p>
   </div>
-  <div class="portfolio">
-    <div class="portfolio-item">
-      <img src="https://i.postimg.cc/Z5QT7KP4/Tradutor-de-zumbis.png" alt="Projeto 1">
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/t4mySzXC/typescript.png" alt="TypeScript">
+      <p>TypeScript</p>
     </div>
-    <div class="portfolio-item">
-      <img src="https://i.postimg.cc/nckJP89R/Tradutor-de-zumbis-1.png" alt="Projeto 2">
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/XJLsLsbs/VDV.png" alt="Github">
+      <p>Github</p>
     </div>
-    <div class="portfolio-item">
-      <img src="https://i.postimg.cc/6QvwzMsY/Tradutor-de-zumbis-2.png" alt="Projeto 3">
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/wTphMXYv/9771699c-9db6-41fc-830e-01640308091d.webp" alt="HTML E CSS">
+      <p>HTML E CSS </p>
+</section>
+<section class="portfolio" id="portifolio">
+  <h2>Portfólio</h2>
+  <div class="projetos">
+    <div class="projeto">
+      <img src="https://i.postimg.cc/MT2DtWSq/Foto-de-perfil-para-redes-sociais-gradiente-simples-9.png" alt="Projeto 1">
+      <h3>ZUNTRANSLATE</h3>
+      <p>Tradutor e gravador de voz portátil com sistema embarcado, também está disponível no GHOUL IA com o prompt "Zuntranslate, traduz para mim".</p>
     </div>
-    <div class="portfolio-item">
-      <img src="https://i.postimg.cc/rwBwrQQC/Tradutor-de-zumbis-3.png" alt="Projeto 4">
+    <div class="projeto">
+      <img src="https://i.postimg.cc/fyrXd60d/Foto-de-perfil-para-redes-sociais-gradiente-simples-8.png" alt="Projeto 2">
+      <h3>GHOULGAME</h3>
+      <p>Linha de Jogos, Consoles, PC Gamer, Sistema embarcado embutido, Consoles portáteis e Computadores Portáteis.</p>
     </div>
-    <div class="portfolio-item">
-      <img src="https://i.postimg.cc/7ZMgsGdz/Tradutor-de-zumbis-4.png" alt="Projeto 5">
+
+    <div class="projeto">
+      <img src="https://i.postimg.cc/y8XpRDtm/Foto-de-perfil-para-redes-sociais-gradiente-simples-5.png" alt="Projeto 3">
+      <h3>PICTIC SO</h3>
+      <p>Sistema embarcado para Câmeras fotográficas antigas.</p>
     </div>
-    <div class="portfolio-item">
-      <img src="https://i.postimg.cc/q7zmYqvB/Tradutor-de-zumbis-6.png" alt="Projeto 6">
+     <div class="projetos">
+    <div class="projeto">
+      <img src="https://i.postimg.cc/YSxbbvpk/Foto-de-perfil-para-redes-sociais-gradiente-simples-10.png" alt="Projeto 4">
+      <h3>ZUNBIE SO</h3>
+      <p>Sistema operacional de todos os ecossistemas criados por mim, com suas versões para cada uma, sendo a de PC: Game, Home, Pro e Server.</p>
+    </div>
+
+    <div class="projeto">
+      <img src="https://i.postimg.cc/kGw1ZGPr/Foto-de-perfil-para-redes-sociais-gradiente-simples-6.png" alt="Projeto 5">
+      <h3>ZUNBIE</h3>
+      <p>Linha de informática, arte e telefonia, que inlcui PC, Notebook, Ultrabook, Mini PC, Tablet, Smartphone, Pen Display e Tablets para carros.</p>
+    </div>
+  <div class="projeto">
+      <img src="https://i.postimg.cc/6QH4GkZh/Foto-de-perfil-para-redes-sociais-gradiente-simples-7.png" alt="Projeto 6">
+      <h3>YELP-FI</h3>
+      <p>Roteador, Internet, Sistemas de rádio frequência e Infravermelho.</p>
+    </div>
+    
+    <div class="projeto">
+      <img src="https://i.postimg.cc/pdZ76G2m/Foto-de-perfil-para-redes-sociais-gradiente-simples-12.png" alt="Projeto 7">
+      <h3>DEAD FAST SECURITY</h3>
+      <p>Antivírus para todas as plataformas.</p>
+    </div>
+     <div class="projeto">
+      <img src="https://i.postimg.cc/B6ntRnK2/Foto-de-perfil-para-redes-sociais-gradiente-simples-14.png" alt="Projeto 8">
+      <h3>GHOUL IA</h3>
+      <p>Apelidado carinhosamente pelo meus amigos como "Monstro interior", o GHOUL IA é uma inteligência artificial capaz de fazer quase tudo por você, desde estudos, até ser sua melhor companhia, pode contar com ele sempre que precisar!</p>
+    </div>
+     <div class="projeto">
+      <img src="https://i.postimg.cc/7YBSmjJC/Foto-de-perfil-para-redes-sociais-gradiente-simples-13.png" alt="Projeto 9">
+      <h3>INNERSINGER</h3>
+      <p>DAW e Editor de voz musical para músicos e entusiastas para criarem seus próprios cantores virtuais em qualquer idioma, e criarem suas músicas!</p>
     </div>
   </div>
 </section>
-  <section id="Contato">
-    <div class="container">
-        <form class="centered-form" action="">
-        <h4 class="centered-heading">Se interessou? Entre em contato pelas redes sociais ou pelo formulário abaixo!</h4>
-  <hr />
-    <div id="formulario">
-        <form style="text-align: center;" action="">
-            <label for="">Nome</label><br/>
-            <input type="text" placeholder="Digite aqui"><br/><br/>
-            <label for="">E-mail</label><br/>
-            <input type="text" placeholder="Digite aqui"><br/><br/>
-            <label for="">Celular</label><br/>
-            <input type="text" placeholder="Digite seu celular" title="Digite seu celular"><br/><br/>
-            <input class="submit-button" type="submit"><br/><br/>
+  <section class="avaliacoes" id="depoimentos">
+  <h2>O que dizem sobre meu trabalho</h2>
+  <div class="cards-avaliacoes">
+    
+    <div class="card">
+      <img src="https://i.postimg.cc/FKppFtcZ/Foto-de-perfil-para-redes-sociais-gradiente-simples.jpg" alt="Frankie Stein">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“A Ghoulia, é uma monstrinha genial, eu amo o GHOUL IA, vocês deveriam experimentar!”</p>
+      <h4>Frankie Stein</h4>
     </div>
- <footer>
-    &copy; Beatriz Gonçalves da Silva, 2025. Todos os direitos reservados.
+
+    <div class="card">
+      <img src="https://i.postimg.cc/4NCXbj7w/Foto-de-perfil-para-redes-sociais-gradiente-simples.png" alt="Cleo de Nile">
+       <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Ai meu Ra! Cinco estrelas é pouco para o esforço, criatividade, dedicação e profissionalismo da Ghoulia! Vou falar com o infeliz que inventou essa coisa de dar no máximo cinco, porque pelo amor né? Gênios como minha melhor amiga, merecem o mundo!”</p>
+      <h4>Cleo de Nile</h4>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/8zcD1Gqp/Foto-de-perfil-para-redes-sociais-gradiente-simples-1.png" alt="Lagoona Blue">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Eu amo o Monstro interior (GHOUL IA) é simplesmente divino! Além de me entender totalmente, me ajuda nas tarefas do dia a dia incluindo as da escola! Contatem a Ghoulia e usem suas invenções, não vão se arrepender!”</p>
+      <h4>Lagoona Blue</h4>
+    </div>
+   <div class="card">
+      <img src="https://i.postimg.cc/g24v9V3X/Foto-de-perfil-para-redes-sociais-gradiente-simples-2.png" alt="Slow Moe">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Uhh.. hmmm aaa.. eee! haa! uhhh!.”</p>
+        <p>“(A Ghoulia é uma profissional incrível! Ela me ajudou a organizar minha vida e a melhorar meu desempenho em várias áreas, fazendo com que monstros e até normies entendam tudo que eu digo com o zuntranslate. Recomendo!)”</p>
+      <h4>Slow Moe</h4>
+    </div>
+     <div class="card">
+      <img src="https://i.postimg.cc/y8KwpHT6/Foto-de-perfil-para-redes-sociais-gradiente-simples-3.png" alt="Spectra Vondergeist">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Eu estava sem wi-fi para postar fofocas no meu site, o babado fantasma, pois a torre de sinal de Monster high era sempre atacada por gárgulas, mas agora com o novíssimo roteador Yelp-fi, eu consigo postar sem interrupções de sinal, obrigada Ghoulia! Salvou a vida do meu blog!”</p>
+      <h4>Spectra Vondergeist</h4>
+    </div>
+     <div class="card">
+      <img src="https://i.postimg.cc/SKSbRhX1/Foto-de-perfil-para-redes-sociais-gradiente-simples-4.png" alt="Deuce Gorgon">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Estou apenas comentando, não só porque fui mandado pela Cleo, como também a Ghoulia merece saca? O Ghoul Game é foda demais moro? Se eu pudesse passava séculos da minha vida jogando, sem contar que graças ao GHOUL IA, entendo a mim mesmo, a minha namorada, estou passando de ano, e consigo alimentar minhas cobras e meu rato de estimação corretamente nos horários certos, valeu mesmo Ghoulia! Podem confiar no trampo dela que essa ai é demais!”</p>
+      <h4>Deuce Gorgon</h4>
+    </div>
+  </div>
+</section>
+
+   <section class="contato" id="contato">
+  <h2>Entre em Contato</h2>
+  <form action="#" method="post">
+    <label for="nome">Nome <span class="obrigatorio">*</span></label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="email">E-mail <span class="obrigatorio">*</span></label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="mensagem">Mensagem <span class="obrigatorio">*</span></label>
+    <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+   <p> Se preferir, me siga nas redes sociais:</p>
+    <div class="redes-sociais">
+   <a href="https://github.com/beailustdream" target="_blank" rel="noopener" title="GitHub">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+      </a>
+      <a href="https://www.instagram.com/ilustdream/" target="_blank" rel="noopener" title="Instagram">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      </a>
+      <a href="https://www.linkedin.com/in/beatriz-gon%C3%A7alves-06bb02358/" target="_blank" rel="noopener" title="LinkedIn">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+      </a>
+      <a href="https://x.com/ilustdream" target="_blank" rel="noopener" title="X/Twitter">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X/Twitter">
+      </a>
+</section>
+
+
+  <footer>
+    <p>&copy; 2025 Beatriz Gonçalves da Silva. Todos os direitos reservados.</p>
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Uso</a>
   </footer>
 </body>
 </html>
