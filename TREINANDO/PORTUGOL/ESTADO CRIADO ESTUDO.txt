@@ -1,0 +1,26 @@
+programa {
+  funcao inicio() {
+
+cadeia est
+
+escreva("sigla do estado:  ")
+leia(est)
+
+se (est == "SP")
+{
+escreva("SAO PAULO")
+}
+senao 
+{
+se (est == "RJ")
+{
+  escreva("RIO DE JANEIRO")
+}
+senao
+{
+escreva("BAHIA")
+
+}
+}
+  } 
+}

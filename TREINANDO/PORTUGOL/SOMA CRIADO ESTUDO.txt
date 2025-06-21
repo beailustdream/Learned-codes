@@ -1,0 +1,20 @@
+programa {
+  funcao inicio() {
+    //DECLARA VARIAVEIS
+    inteiro n1, n2, s
+
+    //MOSTRAR
+    escreva("digite um número: ")
+    leia(n1)
+
+    //MOSTRAR
+   escreva("digite mais um número: ")
+    leia(n2)
+
+    // BASE REALIZAR SOMA
+    s = n1 + n2
+
+    //RESULTADO
+       escreva("eis aqui o resultado: ", s)
+  }
+}

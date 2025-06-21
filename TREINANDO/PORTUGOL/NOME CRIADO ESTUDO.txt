@@ -1,0 +1,10 @@
+programa {
+  funcao inicio() {
+
+cadeia nome
+escreva("digite seu nome:  ")
+leia(nome)
+escreva("o seu nome é:  ", nome)
+
+  } 
+}

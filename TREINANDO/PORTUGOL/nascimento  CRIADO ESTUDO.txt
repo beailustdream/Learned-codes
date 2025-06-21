@@ -1,0 +1,18 @@
+programa {
+  funcao inicio() {
+
+inteiro ano_nasc,  idade 
+
+escreva("informe ano de nascimento: ")
+leia(ano_nasc)
+idade = 2015 - ano_nasc
+se (idade >= 18)
+{
+escreva("maior de idade")
+}
+senao 
+{
+  escreva("menor de idade")
+}
+  } 
+}

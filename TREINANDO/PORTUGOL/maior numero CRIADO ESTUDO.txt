@@ -1,0 +1,30 @@
+programa {
+  funcao inicio() {
+
+inteiro a, b, c
+
+escreva("primeiro valor:  ")
+leia(a)
+escreva("segundo valor:  ")
+leia(b)
+escreva("terceiro valor:  ")
+leia(c)
+
+se ((a > b) e (a > c))
+{
+escreva("maior é: ", a)
+}
+senao 
+{
+se (b > c)
+{
+  escreva("maior é: ", b)
+}
+senao
+{
+escreva("maior é: ", c)
+
+}
+}
+  } 
+}
