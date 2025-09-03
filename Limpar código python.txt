@@ -1,0 +1,10 @@
+Limpar código python
+
+import os #adicione a biblioteca no inicio do código
+ 
+# Chame a função "os.system('cls')" onde desejar no seu código
+# exemplo
+﻿
+print("Mensagem 1")
+os.system('cls')
+print("Mensagem 2")

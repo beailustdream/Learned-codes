@@ -1,621 +1,348 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ghoulia Yelps - Portifólio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista de Tarefas</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap');
+    :root {
+      --bg: #0f172a;          /* slate-900 */
+      --panel: #111827;       /* gray-900 */
+      --muted: #94a3b8;       /* slate-400 */
+      --text: #e5e7eb;        /* gray-200 */
+      --accent: #22c55e;      /* green-500 */
+      --accent-2: #3b82f6;    /* blue-500 */
+      --danger: #ef4444;      /* red-500 */
+      --warning: #f59e0b;     /* amber-500 */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
-      margin: 0;
-     font-family: "WDXL Lubrifont TC", sans-serif;
-     font-weight: 400;
-     font-style: normal;
-      background: #000;
-      color: white;
-    }
-html {
-  scroll-behavior: smooth;
-}
-    header {
-      background: #020511;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+      background: radial-gradient(1200px 800px at 10% 0%, #1f2937 0%, var(--bg) 40%),
+                  radial-gradient(1000px 600px at 100% 100%, #0b1020 0%, var(--bg) 60%);
+      color: var(--text);
+      display: grid; place-items: center; padding: 24px;
     }
 
-    .logo {
-        width: 150px;
-    }
-    nav {
-      display: flex;
-      align-items: right;
-      justify-content: flex-end;
-    }
-    nav a {
-        width: auto;
-        padding: 6px 6px;
-         display: flex;
-        font-size: 18px;
-      margin-left: 20px;
-      color: #fff;
-      text-decoration:  none;
+    .app {
+      width: 100%; max-width: 720px; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius);
+      box-shadow: var(--shadow); backdrop-filter: blur(8px);
     }
 
-    .banner {
-      background: url('https://i.postimg.cc/c1z1CDS7/7f.gif') no-repeat center;
-      background-size: cover;
-      height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    header { padding: 28px 24px 10px 24px; }
+    header h1 { margin: 0; font-size: 28px; letter-spacing: .5px; }
+    header p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+
+    .controls { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 16px 24px 8px; }
+    .input {
+      display: flex; gap: 10px; align-items: center; background: #0b1222; border: 1px solid rgba(255,255,255,.08);
+      padding: 10px 12px; border-radius: 12px;
     }
-
-    .banner h1 {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      font-size: 36px;
+    .input input[type="text"] {
+      flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-size: 16px;
     }
+    .input button { white-space: nowrap; }
 
-    .container {
-      max-width: 1200px;
-      padding: 40px 20px;
-      text-align: center;
+    button, .chip, .icon-btn {
+      border: none; outline: none; cursor: pointer; border-radius: 12px; padding: 10px 14px; font-weight: 600; color: #0b1222;
+      transition: transform .04s ease, filter .2s ease, background .2s ease, border-color .2s ease;
+      background: var(--accent); box-shadow: 0 6px 18px rgba(34,197,94,.25);
     }
-    .sobre {
-  background-color: #f5f5f5;
-  color: #333;
-  padding: 40px 20px;
-  text-align: center;
-}
+    button:active { transform: translateY(1px); }
+    .btn-secondary { background: #182033; color: var(--text); border: 1px solid rgba(255,255,255,.06); box-shadow: none; }
 
-.sobre h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; }
+    .chip { background: #0b1222; color: var(--text); padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.08); }
+    .chip[aria-pressed="true"] { background: var(--accent-2); color: white; border-color: transparent; }
 
-.sobre p {
-  font-size: 18px;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-.sobre {
-  background-color: #040718;
-  color: #ffffff;
-  padding: 40px 20px;
-}
+    .search-wrap { padding: 0 24px 8px; }
+    .search-wrap input { width: 100%; padding: 10px 12px; border-radius: 12px; background: #0b1222; border: 1px solid rgba(255,255,255,.08); color: var(--text); }
 
-.sobre h2 {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 30px;
-}
+    ul#todo-list { list-style: none; margin: 0; padding: 8px 12px 12px; }
+    .item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; }
+    .item + .item { margin-top: 6px; }
+    .item:hover { background: rgba(255,255,255,.04); }
 
-.conteudo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px; 
-  max-width: 800px;
-  margin: 0 auto;
-  flex-wrap: wrap; 
-}
+    .check { appearance: none; width: 22px; height: 22px; border-radius: 6px; border: 2px solid #334155; display: grid; place-items: center; cursor: pointer; }
+    .check:checked { background: var(--accent); border-color: var(--accent); }
+    .check:checked::after { content: "✓"; font-weight: 900; color: #05130a; }
 
-.foto-perfil {
-    align-items: left;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+    .title { font-size: 16px; line-height: 1.3; }
+    .done .title { text-decoration: line-through; color: var(--muted); }
 
-.conteudo p {
-  font-size: 18px;
-  line-height: 1.6;
-  max-width: 500px;
-}
-.habilidades {
-  background-color: #040718;
-  color: #ffffff;
-  padding: 40px 20px;
-  text-align: center;
-}
+    .actions { display: flex; gap: 6px; }
+    .icon-btn { background: #15203a; color: var(--text); padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,.08); }
+    .icon-btn:hover { filter: brightness(1.2); }
+    .icon-btn.warning { background: #2b1c05; border-color: rgba(245, 158, 11, .4); }
+    .icon-btn.danger { background: #2a1214; border-color: rgba(239, 68, 68, .4); }
 
-.habilidades h2 {
-  font-size: 28px;
-  margin-bottom: 30px;
-}
+    footer { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 12px 24px 24px; color: var(--muted); font-size: 14px; }
+    .count strong { color: var(--text); }
 
-.habilidades ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
+    .empty { text-align: center; color: var(--muted); padding: 24px; }
 
-.habilidades li {
-  background-color: #fff;
-  padding: 15px 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-}
-.portfolio {
-  background-color: #020511;
-  padding: 50px 20px;
-  text-align: center;
-}
-
-.portfolio h2 {
-  font-size: 28px;
-  margin-bottom: 40px;
-}
-
-.projetos {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-.projeto {
-  background: #020511;
-  border-radius: 10px;
-  padding: 20px;
-  max-width: 300px;
-}
-
-.projeto img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
-
-.projeto h3 {
-  font-size: 20px;
-  margin: 10px 0;
-}
-
-.projeto p {
-  font-size: 16px;
-  margin-bottom: 15px;
-}
-
-.projeto a {
-  text-decoration: none;
-  background-color: #020511;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 6px;
-  display: inline-block;
-  transition: background 0.3s;
-}
-
-.projeto a:hover {
-  background-color: #020511;
-}
-.contato {
-  background-color: #020511;
-  padding: 50px 20px;
-  text-align: center;
-}
-
-.contato h2 {
-  font-size: 28px;
-  margin-bottom: 30px;
-}
-
-.contato form {
-  max-width: 500px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.contato input,
-.contato textarea {
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.contato button {
-  background-color: #760b0b;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s;
-}
-
-.contato button:hover {
-  background-color: #444;
-}
-.contato label {
-  text-align: left;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.obrigatorio {
-  color: red;
-  margin-left: 4px;
-}
-@keyframes aparecer {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.avaliacoes {
-  background-color: #020511;
-  padding: 50px 20px;
-  text-align: center;
-   opacity: 0;
-  transform: translateY(50px);
-  animation: aparecer 1s ease-out forwards;
-}
-
-.avaliacoes h2 {
-  font-size: 28px;
-  margin-bottom: 40px;
-}
-
-.cards-avaliacoes {
-    animation-delay: 0.2s;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-}
-
-.card {
-    animation-delay: 0.2s;
-  background-color: #581e1e;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  max-width: 300px;
-  text-align: center;
-}
-
-.card img {
-    animation-delay: 0.2s;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.estrelas {
-    animation-delay: 0.2s;
-  font-size: 18px;
-  color: #ffc107; /* amarelo dourado */
-  margin-bottom: 15px;
-}
-
-.card p {
-    animation-delay: 0.2s;
-  font-style: italic;
-  font-size: 16px;
-}
-
-.card h4 {
-    animation-delay: 0.2s;
-  margin-top: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  font-style: normal;
-}
-.lista-habilidades {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
-}
-
-.habilidade {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 120px;
-  background-color: #fff;
-  color: #000;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
-
-.habilidade:hover {
-  transform: translateY(-5px);
-}
-
-.habilidade img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px;
-}
-
-.habilidade p {
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  margin: 0;
-}
-     .redes-sociais {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 15px;
-    }
-
-    .redes-sociais a {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #e0e0e0;
-      overflow: hidden;
-      transition: background-color 0.3s;
-    }
-
-    .redes-sociais a:hover {
-      background-color: #0077b5;
-    }
-
-    .redes-sociais img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-      footer {
-      background: #020511;
-      padding: 20px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    footer a {
-      color: #ccc;
-      text-decoration: none;
+    @media (max-width: 520px) {
+      .controls { grid-template-columns: 1fr; }
+      .filters { justify-content: flex-start; }
     }
   </style>
 </head>
-</head>
 <body>
-  <header>
-    <img src="https://i.postimg.cc/hG4DGHNP/Desenvolvedora-de-Software-1-Photoroom-2.png" alt="logo" class="logo">
-    <nav>
-      <a href="#sobre">Sobre</a>
-      <a href="#habilidades">Habilidades</a>
-      <a href="#portifolio">Portifólio</a>
-      <a href="#depoimentos">Depoimentos</a>
-      <a href="#contato">Contato</a>
-    </nav>
-  </header>
+  <div class="app" role="application" aria-labelledby="title">
+    <header>
+      <h1 id="title">Lista de Tarefas</h1>
+      <p>Adicione, marque como concluída, edite e filtre. Tudo salvo automaticamente no seu navegador.</p>
+    </header>
 
-  <section class="banner">
-     </section>
-
-  <section class="sobre" id="sobre">
-    <div class="conteudo">
-     <img src="https://i.postimg.cc/vHr8DVd8/2f5159e6fdbe14d98dbdb7d4ebc840d9-removebg-preview-1.png" alt="Foto de perfil" class="foto-perfil">
-     </div>
-    <h2>Sobre Mim</h2>
-    <p>Sou desenvolvedora de software com experiência em análise, design e construção de aplicações escaláveis e eficientes. Ao longo da minha carreira, trabalhei em projetos web, desktop e mobile, utilizando tecnologias modernas e boas práticas de desenvolvimento. Tenho paixão por resolver problemas complexos por meio da programação, sempre buscando soluções limpas, seguras e de alto desempenho. Valorizo o trabalho em equipe, a comunicação clara e o aprendizado contínuo. Acredito que o código bem escrito é aquele que entrega valor real para o usuário e pode ser mantido com confiança. Tenho familiaridade com metodologias ágeis, versionamento com Git e integração contínua, além de atuar com testes automatizados e arquitetura de software. Meu objetivo é contribuir com projetos que impactem positivamente a vida de monstros e normies, e continuar evoluindo como profissional.</p>
-  </section>
-  <section class="habilidades" id="habilidades">
-  <h2>Habilidades</h2>
-  <div class="lista-habilidades">
-    
-    <div id="habilidades" class="habilidade">
-      <img src="https://i.postimg.cc/vZWVrpYd/cpplogo-460x460.webp" alt="C++">
-      <p>C++</p>
+    <div class="controls" aria-label="Adicionar tarefa e filtros">
+      <div class="input" role="group" aria-label="Adicionar tarefa">
+        <input id="new-todo" type="text" placeholder="O que precisa fazer? (Enter para adicionar)" autocomplete="off" />
+        <button id="add-btn" aria-label="Adicionar tarefa">Adicionar</button>
+      </div>
+      <div class="filters" role="group" aria-label="Filtros de tarefas">
+        <button class="chip" data-filter="all" aria-pressed="true">Todas</button>
+        <button class="chip" data-filter="active" aria-pressed="false">Ativas</button>
+        <button class="chip" data-filter="done" aria-pressed="false">Concluídas</button>
+      </div>
     </div>
 
-    <div class="habilidade">
-      <img src="https://i.postimg.cc/vZq1M9vc/python-programming-language-icon-c47daf.webp" alt="Python">
-      <p>Python</p>
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Pesquisar tarefas…" aria-label="Pesquisar tarefas" />
     </div>
 
-    <div class="habilidade">
-      <img src="https://i.postimg.cc/J4dmzQ9V/java-logo.png" alt="Java">
-      <p>Java</p>
-    </div>
+    <ul id="todo-list" aria-live="polite" aria-label="Lista de tarefas"></ul>
 
-    <div class="habilidade">
-      <img src="https://i.postimg.cc/mgNvFNng/images.png" alt="C#">
-      <p>C#</p>
-    </div>
-<div class="habilidade">
-      <img src="https://i.postimg.cc/C578q2b4/img-icons8.png" alt="C">
-      <p>C</p>
-    </div>
-<div class="habilidade">
-      <img src="https://i.postimg.cc/XqBMZRRR/png-transparent-web-development-php-web-application-development-software-development-php-miscellaneo.png" alt="PHP">
-      <p>PHP</p>
-    </div>
-<div class="habilidade">
-      <img src="https://i.postimg.cc/Wb487mt4/git-2.webp" alt="Git">
-      <p>Git</p>
-    </div>
-<div class="habilidade">
-      <img src="https://i.postimg.cc/hGK1f9Fg/images.jpg" alt="Ruby">
-      <p>RUBY</p>
-    </div>
-<div class="habilidade">
-      <img src="https://i.postimg.cc/TYYyLC1t/i379792-1-jpeg.webp" alt="Cobol">
-      <p>Cobol</p>
-    </div>
-    <div class="habilidade">
-      <img src="https://i.postimg.cc/mg7GbG4J/Lua-Logo.png" alt="Lua">
-      <p>Lua</p>
-    </div>
-    <div class="habilidade">
-      <img src="https://i.postimg.cc/J0KSy104/DSFW.png" alt="JavaScript">
-      <p>JavaScript</p>
+    <div class="empty" id="empty" hidden>Nenhuma tarefa por aqui… ✨</div>
+
+    <footer>
+      <div class="count">Restantes: <strong id="count">0</strong></div>
+      <div class="footer-actions">
+        <button id="clear-done" class="btn-secondary" aria-label="Limpar concluídas">Limpar concluídas</button>
+        <button id="export" class="btn-secondary" aria-label="Exportar tarefas">Exportar</button>
+        <button id="import" class="btn-secondary" aria-label="Importar tarefas">Importar</button>
+      </div>
+    </footer>
   </div>
-    <div class="habilidade">
-      <img src="https://i.postimg.cc/t4mySzXC/typescript.png" alt="TypeScript">
-      <p>TypeScript</p>
-    </div>
-    <div class="habilidade">
-      <img src="https://i.postimg.cc/XJLsLsbs/VDV.png" alt="Github">
-      <p>Github</p>
-    </div>
-    <div class="habilidade">
-      <img src="https://i.postimg.cc/wTphMXYv/9771699c-9db6-41fc-830e-01640308091d.webp" alt="HTML E CSS">
-      <p>HTML E CSS </p>
-</section>
-<section class="portfolio" id="portifolio">
-  <h2>Portfólio</h2>
-  <div class="projetos">
-    <div class="projeto">
-      <img src="https://i.postimg.cc/MT2DtWSq/Foto-de-perfil-para-redes-sociais-gradiente-simples-9.png" alt="Projeto 1">
-      <h3>ZUNTRANSLATE</h3>
-      <p>Tradutor e gravador de voz portátil com sistema embarcado, também está disponível no GHOUL IA com o prompt "Zuntranslate, traduz para mim".</p>
-    </div>
-    <div class="projeto">
-      <img src="https://i.postimg.cc/fyrXd60d/Foto-de-perfil-para-redes-sociais-gradiente-simples-8.png" alt="Projeto 2">
-      <h3>GHOULGAME</h3>
-      <p>Linha de Jogos, Consoles, PC Gamer, Sistema embarcado embutido, Consoles portáteis e Computadores Portáteis.</p>
-    </div>
 
-    <div class="projeto">
-      <img src="https://i.postimg.cc/y8XpRDtm/Foto-de-perfil-para-redes-sociais-gradiente-simples-5.png" alt="Projeto 3">
-      <h3>PICTIC SO</h3>
-      <p>Sistema embarcado para Câmeras fotográficas antigas.</p>
-    </div>
-     <div class="projetos">
-    <div class="projeto">
-      <img src="https://i.postimg.cc/YSxbbvpk/Foto-de-perfil-para-redes-sociais-gradiente-simples-10.png" alt="Projeto 4">
-      <h3>ZUNBIE SO</h3>
-      <p>Sistema operacional de todos os ecossistemas criados por mim, com suas versões para cada uma, sendo a de PC: Game, Home, Pro e Server.</p>
-    </div>
+  <template id="item-template">
+    <li class="item" draggable="true">
+      <input type="checkbox" class="check" aria-label="Concluir tarefa" />
+      <div class="title" tabindex="0"></div>
+      <div class="actions">
+        <button class="icon-btn" data-action="edit" title="Editar" aria-label="Editar">✎</button>
+        <button class="icon-btn warning" data-action="duplicate" title="Duplicar" aria-label="Duplicar">⧉</button>
+        <button class="icon-btn danger" data-action="delete" title="Excluir" aria-label="Excluir">🗑</button>
+      </div>
+    </li>
+  </template>
 
-    <div class="projeto">
-      <img src="https://i.postimg.cc/kGw1ZGPr/Foto-de-perfil-para-redes-sociais-gradiente-simples-6.png" alt="Projeto 5">
-      <h3>ZUNBIE</h3>
-      <p>Linha de informática, arte e telefonia, que inlcui PC, Notebook, Ultrabook, Mini PC, Tablet, Smartphone, Pen Display e Tablets para carros.</p>
-    </div>
-  <div class="projeto">
-      <img src="https://i.postimg.cc/6QH4GkZh/Foto-de-perfil-para-redes-sociais-gradiente-simples-7.png" alt="Projeto 6">
-      <h3>YELP-FI</h3>
-      <p>Roteador, Internet, Sistemas de rádio frequência e Infravermelho.</p>
-    </div>
-    
-    <div class="projeto">
-      <img src="https://i.postimg.cc/pdZ76G2m/Foto-de-perfil-para-redes-sociais-gradiente-simples-12.png" alt="Projeto 7">
-      <h3>DEAD FAST SECURITY</h3>
-      <p>Antivírus para todas as plataformas.</p>
-    </div>
-     <div class="projeto">
-      <img src="https://i.postimg.cc/B6ntRnK2/Foto-de-perfil-para-redes-sociais-gradiente-simples-14.png" alt="Projeto 8">
-      <h3>GHOUL IA</h3>
-      <p>Apelidado carinhosamente pelo meus amigos como "Monstro interior", o GHOUL IA é uma inteligência artificial capaz de fazer quase tudo por você, desde estudos, até ser sua melhor companhia, pode contar com ele sempre que precisar!</p>
-    </div>
-     <div class="projeto">
-      <img src="https://i.postimg.cc/7YBSmjJC/Foto-de-perfil-para-redes-sociais-gradiente-simples-13.png" alt="Projeto 9">
-      <h3>INNERSINGER</h3>
-      <p>DAW e Editor de voz musical para músicos e entusiastas para criarem seus próprios cantores virtuais em qualquer idioma, e criarem suas músicas!</p>
-    </div>
-  </div>
-</section>
-  <section class="avaliacoes" id="depoimentos">
-  <h2>O que dizem sobre meu trabalho</h2>
-  <div class="cards-avaliacoes">
-    
-    <div class="card">
-      <img src="https://i.postimg.cc/FKppFtcZ/Foto-de-perfil-para-redes-sociais-gradiente-simples.jpg" alt="Frankie Stein">
-      <div class="estrelas">⭐⭐⭐⭐⭐</div>
-      <p>“A Ghoulia, é uma monstrinha genial, eu amo o GHOUL IA, vocês deveriam experimentar!”</p>
-      <h4>Frankie Stein</h4>
-    </div>
+  <script>
+    (function() {
+      const STORAGE_KEY = 'todos-v1';
+      /** @type {{id:string,text:string,done:boolean,order:number}[]} */
+      let todos = [];
+      let filter = 'all';
+      let searchQuery = '';
 
-    <div class="card">
-      <img src="https://i.postimg.cc/4NCXbj7w/Foto-de-perfil-para-redes-sociais-gradiente-simples.png" alt="Cleo de Nile">
-       <div class="estrelas">⭐⭐⭐⭐⭐</div>
-      <p>“Ai meu Ra! Cinco estrelas é pouco para o esforço, criatividade, dedicação e profissionalismo da Ghoulia! Vou falar com o infeliz que inventou essa coisa de dar no máximo cinco, porque pelo amor né? Gênios como minha melhor amiga, merecem o mundo!”</p>
-      <h4>Cleo de Nile</h4>
-    </div>
+      // Elements
+      const list = document.getElementById('todo-list');
+      const empty = document.getElementById('empty');
+      const input = document.getElementById('new-todo');
+      const addBtn = document.getElementById('add-btn');
+      const search = document.getElementById('search');
+      const count = document.getElementById('count');
+      const clearDoneBtn = document.getElementById('clear-done');
+      const exportBtn = document.getElementById('export');
+      const importBtn = document.getElementById('import');
 
-    <div class="card">
-      <img src="https://i.postimg.cc/8zcD1Gqp/Foto-de-perfil-para-redes-sociais-gradiente-simples-1.png" alt="Lagoona Blue">
-      <div class="estrelas">⭐⭐⭐⭐⭐</div>
-      <p>“Eu amo o Monstro interior (GHOUL IA) é simplesmente divino! Além de me entender totalmente, me ajuda nas tarefas do dia a dia incluindo as da escola! Contatem a Ghoulia e usem suas invenções, não vão se arrepender!”</p>
-      <h4>Lagoona Blue</h4>
-    </div>
-   <div class="card">
-      <img src="https://i.postimg.cc/g24v9V3X/Foto-de-perfil-para-redes-sociais-gradiente-simples-2.png" alt="Slow Moe">
-      <div class="estrelas">⭐⭐⭐⭐⭐</div>
-      <p>“Uhh.. hmmm aaa.. eee! haa! uhhh!.”</p>
-        <p>“(A Ghoulia é uma profissional incrível! Ela me ajudou a organizar minha vida e a melhorar meu desempenho em várias áreas, fazendo com que monstros e até normies entendam tudo que eu digo com o zuntranslate. Recomendo!)”</p>
-      <h4>Slow Moe</h4>
-    </div>
-     <div class="card">
-      <img src="https://i.postimg.cc/y8KwpHT6/Foto-de-perfil-para-redes-sociais-gradiente-simples-3.png" alt="Spectra Vondergeist">
-      <div class="estrelas">⭐⭐⭐⭐⭐</div>
-      <p>“Eu estava sem wi-fi para postar fofocas no meu site, o babado fantasma, pois a torre de sinal de Monster high era sempre atacada por gárgulas, mas agora com o novíssimo roteador Yelp-fi, eu consigo postar sem interrupções de sinal, obrigada Ghoulia! Salvou a vida do meu blog!”</p>
-      <h4>Spectra Vondergeist</h4>
-    </div>
-     <div class="card">
-      <img src="https://i.postimg.cc/SKSbRhX1/Foto-de-perfil-para-redes-sociais-gradiente-simples-4.png" alt="Deuce Gorgon">
-      <div class="estrelas">⭐⭐⭐⭐⭐</div>
-      <p>“Estou apenas comentando, não só porque fui mandado pela Cleo, como também a Ghoulia merece saca? O Ghoul Game é foda demais moro? Se eu pudesse passava séculos da minha vida jogando, sem contar que graças ao GHOUL IA, entendo a mim mesmo, a minha namorada, estou passando de ano, e consigo alimentar minhas cobras e meu rato de estimação corretamente nos horários certos, valeu mesmo Ghoulia! Podem confiar no trampo dela que essa ai é demais!”</p>
-      <h4>Deuce Gorgon</h4>
-    </div>
-  </div>
-</section>
+      // Load
+      try { todos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { todos = []; }
+      normalizeOrder();
+      render();
 
-   <section class="contato" id="contato">
-  <h2>Entre em Contato</h2>
-  <form action="#" method="post">
-    <label for="nome">Nome <span class="obrigatorio">*</span></label>
-    <input type="text" id="nome" name="nome" required>
+      // Events
+      addBtn.addEventListener('click', () => tryAdd());
+      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryAdd(); });
+      search.addEventListener('input', () => { searchQuery = search.value.trim().toLowerCase(); render(); });
 
-    <label for="email">E-mail <span class="obrigatorio">*</span></label>
-    <input type="email" id="email" name="email" required>
+      document.querySelectorAll('.filters .chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filters .chip').forEach(b => b.setAttribute('aria-pressed', 'false'));
+          btn.setAttribute('aria-pressed', 'true');
+          filter = btn.dataset.filter;
+          render();
+        });
+      });
 
-    <label for="mensagem">Mensagem <span class="obrigatorio">*</span></label>
-    <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+      clearDoneBtn.addEventListener('click', () => {
+        todos = todos.filter(t => !t.done);
+        save();
+        render();
+      });
 
-    <button type="submit">Enviar</button>
-  </form>
-   <p> Se preferir, me siga nas redes sociais:</p>
-    <div class="redes-sociais">
-   <a href="https://github.com/beailustdream" target="_blank" rel="noopener" title="GitHub">
-        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-      </a>
-      <a href="https://www.instagram.com/ilustdream/" target="_blank" rel="noopener" title="Instagram">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-      </a>
-      <a href="https://www.linkedin.com/in/beatriz-gon%C3%A7alves-06bb02358/" target="_blank" rel="noopener" title="LinkedIn">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
-      </a>
-      <a href="https://x.com/ilustdream" target="_blank" rel="noopener" title="X/Twitter">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X/Twitter">
-      </a>
-</section>
+      exportBtn.addEventListener('click', () => {
+        const blob = new Blob([JSON.stringify(todos, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'tarefas.json'; a.click();
+        URL.revokeObjectURL(url);
+      });
 
+      importBtn.addEventListener('click', async () => {
+        const inputFile = document.createElement('input');
+        inputFile.type = 'file';
+        inputFile.accept = 'application/json';
+        inputFile.onchange = () => {
+          const file = inputFile.files[0]; if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            try {
+              const data = JSON.parse(reader.result);
+              if (Array.isArray(data)) {
+                todos = data.map((t, i) => ({ id: uid(), text: String(t.text ?? ''), done: !!t.done, order: i }));
+                save();
+                render();
+              } else alert('Arquivo inválido.');
+            } catch { alert('Não foi possível ler o arquivo.'); }
+          };
+          reader.readAsText(file);
+        };
+        inputFile.click();
+      });
 
-  <footer>
-    <p>&copy; 2025 Beatriz Gonçalves da Silva. Todos os direitos reservados.</p>
-    <a href="#">Política de Privacidade</a>
-    <a href="#">Termos de Uso</a>
-  </footer>
+      // Drag & Drop reorder
+      let dragId = null;
+      list.addEventListener('dragstart', (e) => {
+        const li = e.target.closest('li.item');
+        if (!li) return;
+        dragId = li.dataset.id;
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      list.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const over = e.target.closest('li.item');
+        if (!over || over.dataset.id === dragId) return;
+        const dragIdx = todos.findIndex(t => t.id === dragId);
+        const overIdx = todos.findIndex(t => t.id === over.dataset.id);
+        const draggingDown = dragIdx < overIdx;
+        list.insertBefore(document.querySelector(`li.item[data-id="${dragId}"]`), draggingDown ? over.nextSibling : over);
+      });
+      list.addEventListener('drop', () => {
+        const items = [...list.querySelectorAll('li.item')];
+        items.forEach((li, i) => {
+          const todo = todos.find(t => t.id === li.dataset.id);
+          if (todo) todo.order = i;
+        });
+        todos.sort((a,b)=>a.order-b.order);
+        save();
+      });
+
+      function tryAdd() {
+        const text = input.value.trim();
+        if (!text) return;
+        todos.push({ id: uid(), text, done: false, order: todos.length });
+        input.value = '';
+        save();
+        render(true);
+      }
+
+      function render(focusLast=false) {
+        const frag = document.createDocumentFragment();
+        const template = document.getElementById('item-template');
+        const filtered = todos
+          .filter(t => filter === 'all' || (filter === 'active' ? !t.done : t.done))
+          .filter(t => t.text.toLowerCase().includes(searchQuery))
+          .sort((a,b) => a.order - b.order);
+
+        list.innerHTML = '';
+        filtered.forEach(t => {
+          const node = template.content.cloneNode(true);
+          const li = node.querySelector('li');
+          li.dataset.id = t.id;
+          if (t.done) li.classList.add('done');
+
+          const check = node.querySelector('.check');
+          check.checked = t.done;
+          check.addEventListener('change', () => toggle(t.id));
+
+          const title = node.querySelector('.title');
+          title.textContent = t.text;
+          title.addEventListener('dblclick', () => startEdit(li, t));
+          title.addEventListener('keydown', (e) => { if (e.key === 'Enter') startEdit(li, t); });
+
+          node.querySelector('[data-action="edit"]').addEventListener('click', () => startEdit(li, t));
+          node.querySelector('[data-action="duplicate"]').addEventListener('click', () => duplicate(t.id));
+          node.querySelector('[data-action="delete"]').addEventListener('click', () => remove(t.id));
+
+          frag.appendChild(node);
+        });
+        list.appendChild(frag);
+
+        const remaining = todos.filter(t => !t.done).length;
+        count.textContent = remaining;
+        empty.hidden = filtered.length !== 0;
+
+        if (focusLast) {
+          const last = list.lastElementChild?.querySelector('.title');
+          last?.focus();
+        }
+      }
+
+      function startEdit(li, todo) {
+        const current = li.querySelector('.title');
+        const input = document.createElement('input');
+        input.type = 'text'; input.value = todo.text; input.className = 'title'; input.style.background = 'transparent';
+        li.replaceChild(input, current);
+        input.focus(); input.select();
+
+        const commit = () => {
+          const v = input.value.trim();
+          if (!v) { remove(todo.id); return; }
+          todo.text = v; save(); render();
+        };
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') commit();
+          if (e.key === 'Escape') render();
+        });
+        input.addEventListener('blur', commit);
+      }
+
+      function toggle(id) {
+        const t = todos.find(x => x.id === id);
+        if (!t) return; t.done = !t.done; save(); render();
+      }
+
+      function remove(id) {
+        const idx = todos.findIndex(x => x.id === id);
+        if (idx >= 0) { todos.splice(idx,1); normalizeOrder(); save(); render(); }
+      }
+
+      function duplicate(id) {
+        const t = todos.find(x => x.id === id);
+        if (!t) return;
+        const copy = { ...t, id: uid(), text: t.text + ' (cópia)', order: (t.order ?? 0) + 0.5 };
+        todos.push(copy);
+        reindexOrder();
+        save();
+        render(true);
+      }
+
+      function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(todos)); }
+
+      function uid() { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4); }
+
+      function normalizeOrder() {
+        todos.sort((a,b)=> (a.order ?? 0) - (b.order ?? 0));
+        reindexOrder();
+      }
+      function reindexOrder() { todos.forEach((t,i)=> t.order = i); }
+    })();
+  </script>
 </body>
 </html>
+
