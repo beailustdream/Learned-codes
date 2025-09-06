@@ -4,28 +4,14 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 1  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-# Inicializando os contadores
-multiplos_de_2 = 0
-multiplos_de_3 = 0
+avaliacoes = [8, 7, 9, 6, 10]
+soma_avaliacoes = 0
 
-# Loop de 1 até 30 (inclusivo)
-for i in range(1, 31):
-    print(i, end=" ")  # imprime os números lado a lado
-    
-    # Verifica se é múltiplo de 2
-    if i % 2 == 0:
-        multiplos_de_2 += 1
-    
-    # Verifica se é múltiplo de 3
-    if i % 3 == 0:
-        multiplos_de_3 += 1
+for nota in avaliacoes:
+    soma_avaliacoes += nota
 
-# Pula uma linha no final da sequência
-print("\n")
-
-# Mostra os resultados
-print(f"Quantidade de múltiplos de 2: {multiplos_de_2}")
-print(f"Quantidade de múltiplos de 3: {multiplos_de_3}")
+media = soma_avaliacoes / len(avaliacoes)
+print(f"Média das avaliações: {media:.2f}")
 
 #Codigos exercicio 2
 print()
@@ -33,10 +19,13 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 2  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-# Contador regressivo de 15 até 0
-for i in range(15, -1, -1):
-    print(i, end=" ")
-print()  # Pula linha ao final
+playlist = ["Shape of You", "Blinding Lights", "Levitating", "Perfect", "Dance Monkey"]
+musica_procurada = "Levitating"
+
+if musica_procurada in playlist:
+    print("Música encontrada na playlist!")
+else:
+    print("Música não encontrada na playlist.")
 
 #Codigos exercicio 3
 print()
@@ -44,12 +33,9 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 3  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-# Verificação de Divisibilidade
-numero = 10
-if numero % 2 == 0 and numero % 5 == 0:
-    print(f"O número {numero} é divisível por 2 e por 5 ao mesmo tempo.")
-else:
-    print(f"O número {numero} NÃO é divisível por 2 e por 5 ao mesmo tempo.")
+pedidos_do_dia = ["pizza", "hambúrguer", "refrigerante", "pizza", "sorvete"]
+quantidade_pedidos = len(pedidos_do_dia)
+print(f"Quantidade de pedidos do dia: {quantidade_pedidos}")
 
 #Codigos exercicio 4
 print()
@@ -57,15 +43,10 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 4  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-    # Variável acumuladora
-soma_total = 0
+convidados = ["Ana", "Bruno", "Carlos", "Diana"]
 
-# Loop de 1 até 50 (inclusivo)
-for i in range(1, 51):
-    soma_total += i  # soma cada número à variável
-
-# Exibe o resultado final
-print("A soma dos números de 1 a 50 é:", soma_total)
+for nome in convidados:
+    print(f"Olá, {nome}! Você está convidado(a) para a festa.")
 
 #Codigos exercicio 5
 print()
@@ -73,38 +54,17 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 5  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-# Variáveis de votos
-votos_A = 0
-votos_B = 0
+historico = [
+    "https://www.google.com/search?q=google.com",
+    "youtube.com",
+    "https://www.wikipedia.org"
+]
+novo_site = "https://www.github.com"
+historico.append(novo_site)
 
-print("=== Simulação de Votação ===")
-print("Digite 1 para votar no Candidato A")
-print("Digite 2 para votar no Candidato B")
-print("Digite 0 para encerrar a votação\n")
-
-while True:
-    voto = int(input("Seu voto: "))
-    
-    if voto == 0:
-        break  # encerra o loop
-    elif voto == 1:
-        votos_A += 1
-    elif voto == 2:
-        votos_B += 1
-    else:
-        print("Voto inválido! Digite 1, 2 ou 0.")
-
-# Resultado da votação
-print("\n=== Resultado da Votação ===")
-print(f"Total de votos para A: {votos_A}")
-print(f"Total de votos para B: {votos_B}")
-
-if votos_A > votos_B:
-    print("Candidato A é o vencedor!")
-elif votos_B > votos_A:
-    print("Candidato B é o vencedor!")
-else:
-    print("A votação terminou em empate!")
+print("Histórico de navegação:")
+for site in historico:
+    print(site)
 
 #Codigos exercicio 6
 print()
@@ -112,17 +72,19 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 6  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-# Solicita um número ao usuário
-numero = int(input("Digite um número de 1 a 10: "))
+usuarios_validos = ["joao", "maria", "ana", "carlos", "beatriz"]
+usuario_digitado = "ana"  # Altere para testar outros nomes
 
-# Verifica se o número está no intervalo permitido
-if 1 <= numero <= 10:
-    print(f"\nTabuada do {numero}:")
-    for i in range(1, 11):
-        resultado = numero * i
-        print(f"{numero} x {i} = {resultado}")
+acesso = False
+for usuario in usuarios_validos:
+    if usuario == usuario_digitado:
+        acesso = True
+        break
+
+if acesso:
+    print("Acesso concedido!")
 else:
-    print("Número inválido! Digite um número entre 1 e 10.")
+    print("Usuário não encontrado. Acesso negado.")
 
 #Codigos exercicio 7
 print()
@@ -130,17 +92,15 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 7  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-# Senha correta definida
-senha_correta = "1234"
-tentativas = 3
+distancias_km = [5, 10, 21.1, 42.2, 100]
+distancias_milhas = []
 
-for tentativa in range(1, tentativas + 1):
-    senha = input(f"Tentativa {tentativa} - Digite a senha: ")
-    if senha == senha_correta:
-        print("Acesso Concedido")
-        break
-else:
-    print("Acesso Negado. Muitas tentativas.")
+for km in distancias_km:
+    milhas = km * 0.621371
+    distancias_milhas.append(milhas)
+
+print("Distâncias em quilômetros:", distancias_km)
+print("Distâncias em milhas:", [f"{m:.2f}" for m in distancias_milhas])
 
 #Codigos exercicio 8
 print()
@@ -148,18 +108,14 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 8  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-# Soma de pares e ímpares de 1 a 100
-soma_pares = 0
-soma_impares = 0
+inventario = ("maçã", 10, "caixa", 5, "banana", 7, "garrafa", 3)
+total_itens = 0
 
-for i in range(1, 101):
-    if i % 2 == 0:
-        soma_pares += i
-    else:
-        soma_impares += i
+for item in inventario:
+    if isinstance(item, int):
+        total_itens += item
 
-print(f"Soma dos números pares de 1 a 100: {soma_pares}")
-print(f"Soma dos números ímpares de 1 a 100: {soma_impares}")
+print(f"Quantidade total de itens no inventário: {total_itens}")
 
 #Codigos exercicio 9
 print()
@@ -167,19 +123,18 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 9  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-palavra = input("Digite uma palavra: ").strip()
-vogais = "aeiouAEIOU"
-total_vogais = 0
-total_consoantes = 0
-for letra in palavra:
-    if letra.isalpha():
-        if letra in vogais:
-            total_vogais += 1
-        else:
-            total_consoantes += 1
+numeros_ordenados = [1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
+numero_procurado = 5
 
-print(f"Total de vogais: {total_vogais}")
-print(f"Total de consoantes: {total_consoantes}")
+contador = 0
+for numero in numeros_ordenados:
+    if numero == numero_procurado:
+        contador += 1
+
+if contador > 0:
+    print(f"Número encontrado e ele apareceu {contador} vezes.")
+else:
+    print("Número não encontrado.")
 
 #Codigos exercicio 10
 print()
@@ -187,36 +142,20 @@ print("- - - - - - - - - - - - - - - - - - - - -")
 print("- - - Bloco de Codigo: Exercicio 10  - - -")
 print("- - - - - - - - - - - - - - - - - - - - -")
 
-while True:
-    operacao = input("Digite a operação (+, -, *, /) ou 'sair' para encerrar: ").strip()
-    if operacao.lower() == "sair":
-        print("Calculadora encerrada.")
-        break
+notas_turma = [8.5, 6.0, 7.2, 5.5, 9.0, 4.8, 7.0, 6.9, 10.0, 3.5]
+aprovados = []
+reprovados = []
 
-    if operacao not in ['+', '-', '*', '/']:
-        print("Operação inválida. Tente novamente.")
-        continue
+for nota in notas_turma:
+    if nota >= 7:
+        aprovados.append(nota)
+    else:
+        reprovados.append(nota)
 
-    try:
-        num1 = float(input("Digite o primeiro número: "))
-        num2 = float(input("Digite o segundo número: "))
-    except ValueError:
-        print("Entrada inválida. Digite números válidos.")
-        continue
+print("Notas dos aprovados:", aprovados)
+print("Notas dos reprovados:", reprovados)
 
-    if operacao == '+':
-        resultado = num1 + num2
-    elif operacao == '-':
-        resultado = num1 - num2
-    elif operacao == '*':
-        resultado = num1 * num2
-    elif operacao == '/':
-        if num2 == 0:
-            print("Erro: divisão por zero.")
-            continue
-        resultado = num1 / num2
-
-    print(f"Resultado: {resultado}")
-    
-    #despedida criativa
-print("Exercícios concluídos com sucesso! Itadakimassu!")
+print("- - - - - - - - - - - - - - - - - - - - -")
+#Happy ending! :)print()
+print("Exercícios concluídos com sucesso! Como dizia Mikey de Tokyo revengers, Bye Bye! :)")
+print("- - - - - - - - - - - - - - - - - - - - -")
