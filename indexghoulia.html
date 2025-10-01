@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghoulia Yelps - Portifólio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap');
+    body {
+      margin: 0;
+     font-family: "WDXL Lubrifont TC", sans-serif;
+     font-weight: 400;
+     font-style: normal;
+      background: #000;
+      color: white;
+    }
+html {
+  scroll-behavior: smooth;
+}
+    header {
+      background: #020511;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+        width: 150px;
+    }
+    nav {
+      display: flex;
+      align-items: right;
+      justify-content: flex-end;
+    }
+    nav a {
+        width: auto;
+        padding: 6px 6px;
+         display: flex;
+        font-size: 18px;
+      margin-left: 20px;
+      color: #fff;
+      text-decoration:  none;
+    }
+
+    .banner {
+      background: url('https://i.postimg.cc/c1z1CDS7/7f.gif') no-repeat center;
+      background-size: cover;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .banner h1 {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      font-size: 36px;
+    }
+
+    .container {
+      max-width: 1200px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .sobre {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.sobre h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.sobre p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.sobre {
+  background-color: #040718;
+  color: #ffffff;
+  padding: 40px 20px;
+}
+
+.sobre h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px; 
+  max-width: 800px;
+  margin: 0 auto;
+  flex-wrap: wrap; 
+}
+
+.foto-perfil {
+    align-items: left;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.conteudo p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 500px;
+}
+.habilidades {
+  background-color: #040718;
+  color: #ffffff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.habilidades h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.habilidades ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.habilidades li {
+  background-color: #fff;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+.portfolio {
+  background-color: #020511;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.portfolio h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.projetos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.projeto {
+  background: #020511;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 300px;
+}
+
+.projeto img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.projeto h3 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.projeto p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.projeto a {
+  text-decoration: none;
+  background-color: #020511;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.projeto a:hover {
+  background-color: #020511;
+}
+.contato {
+  background-color: #020511;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.contato h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.contato form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contato input,
+.contato textarea {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contato button {
+  background-color: #760b0b;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.contato button:hover {
+  background-color: #444;
+}
+.contato label {
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.obrigatorio {
+  color: red;
+  margin-left: 4px;
+}
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.avaliacoes {
+  background-color: #020511;
+  padding: 50px 20px;
+  text-align: center;
+   opacity: 0;
+  transform: translateY(50px);
+  animation: aparecer 1s ease-out forwards;
+}
+
+.avaliacoes h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.cards-avaliacoes {
+    animation-delay: 0.2s;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.card {
+    animation-delay: 0.2s;
+  background-color: #581e1e;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  max-width: 300px;
+  text-align: center;
+}
+
+.card img {
+    animation-delay: 0.2s;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.estrelas {
+    animation-delay: 0.2s;
+  font-size: 18px;
+  color: #ffc107; /* amarelo dourado */
+  margin-bottom: 15px;
+}
+
+.card p {
+    animation-delay: 0.2s;
+  font-style: italic;
+  font-size: 16px;
+}
+
+.card h4 {
+    animation-delay: 0.2s;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+}
+.lista-habilidades {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.habilidade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.habilidade:hover {
+  transform: translateY(-5px);
+}
+
+.habilidade img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.habilidade p {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+}
+     .redes-sociais {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .redes-sociais a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      overflow: hidden;
+      transition: background-color 0.3s;
+    }
+
+    .redes-sociais a:hover {
+      background-color: #0077b5;
+    }
+
+    .redes-sociais img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+      footer {
+      background: #020511;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+  </style>
+</head>
+</head>
+<body>
+  <header>
+    <img src="https://i.postimg.cc/hG4DGHNP/Desenvolvedora-de-Software-1-Photoroom-2.png" alt="logo" class="logo">
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#portifolio">Portifólio</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <section class="banner">
+     </section>
+
+  <section class="sobre" id="sobre">
+    <div class="conteudo">
+     <img src="https://i.postimg.cc/vHr8DVd8/2f5159e6fdbe14d98dbdb7d4ebc840d9-removebg-preview-1.png" alt="Foto de perfil" class="foto-perfil">
+     </div>
+    <h2>Sobre Mim</h2>
+    <p>Sou desenvolvedora de software com experiência em análise, design e construção de aplicações escaláveis e eficientes. Ao longo da minha carreira, trabalhei em projetos web, desktop e mobile, utilizando tecnologias modernas e boas práticas de desenvolvimento. Tenho paixão por resolver problemas complexos por meio da programação, sempre buscando soluções limpas, seguras e de alto desempenho. Valorizo o trabalho em equipe, a comunicação clara e o aprendizado contínuo. Acredito que o código bem escrito é aquele que entrega valor real para o usuário e pode ser mantido com confiança. Tenho familiaridade com metodologias ágeis, versionamento com Git e integração contínua, além de atuar com testes automatizados e arquitetura de software. Meu objetivo é contribuir com projetos que impactem positivamente a vida de monstros e normies, e continuar evoluindo como profissional.</p>
+  </section>
+  <section class="habilidades" id="habilidades">
+  <h2>Habilidades</h2>
+  <div class="lista-habilidades">
+    
+    <div id="habilidades" class="habilidade">
+      <img src="https://i.postimg.cc/vZWVrpYd/cpplogo-460x460.webp" alt="C++">
+      <p>C++</p>
+    </div>
+
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/vZq1M9vc/python-programming-language-icon-c47daf.webp" alt="Python">
+      <p>Python</p>
+    </div>
+
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/J4dmzQ9V/java-logo.png" alt="Java">
+      <p>Java</p>
+    </div>
+
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/mgNvFNng/images.png" alt="C#">
+      <p>C#</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/C578q2b4/img-icons8.png" alt="C">
+      <p>C</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/XqBMZRRR/png-transparent-web-development-php-web-application-development-software-development-php-miscellaneo.png" alt="PHP">
+      <p>PHP</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/Wb487mt4/git-2.webp" alt="Git">
+      <p>Git</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/hGK1f9Fg/images.jpg" alt="Ruby">
+      <p>RUBY</p>
+    </div>
+<div class="habilidade">
+      <img src="https://i.postimg.cc/TYYyLC1t/i379792-1-jpeg.webp" alt="Cobol">
+      <p>Cobol</p>
+    </div>
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/mg7GbG4J/Lua-Logo.png" alt="Lua">
+      <p>Lua</p>
+    </div>
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/J0KSy104/DSFW.png" alt="JavaScript">
+      <p>JavaScript</p>
+  </div>
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/t4mySzXC/typescript.png" alt="TypeScript">
+      <p>TypeScript</p>
+    </div>
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/XJLsLsbs/VDV.png" alt="Github">
+      <p>Github</p>
+    </div>
+    <div class="habilidade">
+      <img src="https://i.postimg.cc/wTphMXYv/9771699c-9db6-41fc-830e-01640308091d.webp" alt="HTML E CSS">
+      <p>HTML E CSS </p>
+</section>
+<section class="portfolio" id="portifolio">
+  <h2>Portfólio</h2>
+  <div class="projetos">
+    <div class="projeto">
+      <img src="https://i.postimg.cc/MT2DtWSq/Foto-de-perfil-para-redes-sociais-gradiente-simples-9.png" alt="Projeto 1">
+      <h3>ZUNTRANSLATE</h3>
+      <p>Tradutor e gravador de voz portátil com sistema embarcado, também está disponível no GHOUL IA com o prompt "Zuntranslate, traduz para mim".</p>
+    </div>
+    <div class="projeto">
+      <img src="https://i.postimg.cc/fyrXd60d/Foto-de-perfil-para-redes-sociais-gradiente-simples-8.png" alt="Projeto 2">
+      <h3>GHOULGAME</h3>
+      <p>Linha de Jogos, Consoles, PC Gamer, Sistema embarcado embutido, Consoles portáteis e Computadores Portáteis.</p>
+    </div>
+
+    <div class="projeto">
+      <img src="https://i.postimg.cc/y8XpRDtm/Foto-de-perfil-para-redes-sociais-gradiente-simples-5.png" alt="Projeto 3">
+      <h3>PICTIC SO</h3>
+      <p>Sistema embarcado para Câmeras fotográficas antigas.</p>
+    </div>
+     <div class="projetos">
+    <div class="projeto">
+      <img src="https://i.postimg.cc/YSxbbvpk/Foto-de-perfil-para-redes-sociais-gradiente-simples-10.png" alt="Projeto 4">
+      <h3>ZUNBIE SO</h3>
+      <p>Sistema operacional de todos os ecossistemas criados por mim, com suas versões para cada uma, sendo a de PC: Game, Home, Pro e Server.</p>
+    </div>
+
+    <div class="projeto">
+      <img src="https://i.postimg.cc/kGw1ZGPr/Foto-de-perfil-para-redes-sociais-gradiente-simples-6.png" alt="Projeto 5">
+      <h3>ZUNBIE</h3>
+      <p>Linha de informática, arte e telefonia, que inlcui PC, Notebook, Ultrabook, Mini PC, Tablet, Smartphone, Pen Display e Tablets para carros.</p>
+    </div>
+  <div class="projeto">
+      <img src="https://i.postimg.cc/6QH4GkZh/Foto-de-perfil-para-redes-sociais-gradiente-simples-7.png" alt="Projeto 6">
+      <h3>YELP-FI</h3>
+      <p>Roteador, Internet, Sistemas de rádio frequência e Infravermelho.</p>
+    </div>
+    
+    <div class="projeto">
+      <img src="https://i.postimg.cc/pdZ76G2m/Foto-de-perfil-para-redes-sociais-gradiente-simples-12.png" alt="Projeto 7">
+      <h3>DEAD FAST SECURITY</h3>
+      <p>Antivírus para todas as plataformas.</p>
+    </div>
+     <div class="projeto">
+      <img src="https://i.postimg.cc/B6ntRnK2/Foto-de-perfil-para-redes-sociais-gradiente-simples-14.png" alt="Projeto 8">
+      <h3>GHOUL IA</h3>
+      <p>Apelidado carinhosamente pelo meus amigos como "Monstro interior", o GHOUL IA é uma inteligência artificial capaz de fazer quase tudo por você, desde estudos, até ser sua melhor companhia, pode contar com ele sempre que precisar!</p>
+    </div>
+     <div class="projeto">
+      <img src="https://i.postimg.cc/7YBSmjJC/Foto-de-perfil-para-redes-sociais-gradiente-simples-13.png" alt="Projeto 9">
+      <h3>INNERSINGER</h3>
+      <p>DAW e Editor de voz musical para músicos e entusiastas para criarem seus próprios cantores virtuais em qualquer idioma, e criarem suas músicas!</p>
+    </div>
+  </div>
+</section>
+  <section class="avaliacoes" id="depoimentos">
+  <h2>O que dizem sobre meu trabalho</h2>
+  <div class="cards-avaliacoes">
+    
+    <div class="card">
+      <img src="https://i.postimg.cc/FKppFtcZ/Foto-de-perfil-para-redes-sociais-gradiente-simples.jpg" alt="Frankie Stein">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“A Ghoulia, é uma monstrinha genial, eu amo o GHOUL IA, vocês deveriam experimentar!”</p>
+      <h4>Frankie Stein</h4>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/4NCXbj7w/Foto-de-perfil-para-redes-sociais-gradiente-simples.png" alt="Cleo de Nile">
+       <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Ai meu Ra! Cinco estrelas é pouco para o esforço, criatividade, dedicação e profissionalismo da Ghoulia! Vou falar com o infeliz que inventou essa coisa de dar no máximo cinco, porque pelo amor né? Gênios como minha melhor amiga, merecem o mundo!”</p>
+      <h4>Cleo de Nile</h4>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/8zcD1Gqp/Foto-de-perfil-para-redes-sociais-gradiente-simples-1.png" alt="Lagoona Blue">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Eu amo o Monstro interior (GHOUL IA) é simplesmente divino! Além de me entender totalmente, me ajuda nas tarefas do dia a dia incluindo as da escola! Contatem a Ghoulia e usem suas invenções, não vão se arrepender!”</p>
+      <h4>Lagoona Blue</h4>
+    </div>
+   <div class="card">
+      <img src="https://i.postimg.cc/g24v9V3X/Foto-de-perfil-para-redes-sociais-gradiente-simples-2.png" alt="Slow Moe">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Uhh.. hmmm aaa.. eee! haa! uhhh!.”</p>
+        <p>“(A Ghoulia é uma profissional incrível! Ela me ajudou a organizar minha vida e a melhorar meu desempenho em várias áreas, fazendo com que monstros e até normies entendam tudo que eu digo com o zuntranslate. Recomendo!)”</p>
+      <h4>Slow Moe</h4>
+    </div>
+     <div class="card">
+      <img src="https://i.postimg.cc/y8KwpHT6/Foto-de-perfil-para-redes-sociais-gradiente-simples-3.png" alt="Spectra Vondergeist">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Eu estava sem wi-fi para postar fofocas no meu site, o babado fantasma, pois a torre de sinal de Monster high era sempre atacada por gárgulas, mas agora com o novíssimo roteador Yelp-fi, eu consigo postar sem interrupções de sinal, obrigada Ghoulia! Salvou a vida do meu blog!”</p>
+      <h4>Spectra Vondergeist</h4>
+    </div>
+     <div class="card">
+      <img src="https://i.postimg.cc/SKSbRhX1/Foto-de-perfil-para-redes-sociais-gradiente-simples-4.png" alt="Deuce Gorgon">
+      <div class="estrelas">⭐⭐⭐⭐⭐</div>
+      <p>“Estou apenas comentando, não só porque fui mandado pela Cleo, como também a Ghoulia merece saca? O Ghoul Game é foda demais moro? Se eu pudesse passava séculos da minha vida jogando, sem contar que graças ao GHOUL IA, entendo a mim mesmo, a minha namorada, estou passando de ano, e consigo alimentar minhas cobras e meu rato de estimação corretamente nos horários certos, valeu mesmo Ghoulia! Podem confiar no trampo dela que essa ai é demais!”</p>
+      <h4>Deuce Gorgon</h4>
+    </div>
+  </div>
+</section>
+
+   <section class="contato" id="contato">
+  <h2>Entre em Contato</h2>
+  <form action="#" method="post">
+    <label for="nome">Nome <span class="obrigatorio">*</span></label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="email">E-mail <span class="obrigatorio">*</span></label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="mensagem">Mensagem <span class="obrigatorio">*</span></label>
+    <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+   <p> Se preferir, me siga nas redes sociais:</p>
+    <div class="redes-sociais">
+   <a href="https://github.com/beailustdream" target="_blank" rel="noopener" title="GitHub">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+      </a>
+      <a href="https://www.instagram.com/ilustdream/" target="_blank" rel="noopener" title="Instagram">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      </a>
+      <a href="https://www.linkedin.com/in/beatriz-gon%C3%A7alves-06bb02358/" target="_blank" rel="noopener" title="LinkedIn">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+      </a>
+      <a href="https://x.com/ilustdream" target="_blank" rel="noopener" title="X/Twitter">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X/Twitter">
+      </a>
+</section>
+
+
+  <footer>
+    <p>&copy; 2025 Beatriz Gonçalves da Silva. Todos os direitos reservados.</p>
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Uso</a>
+  </footer>
+</body>
+</html>
