@@ -1,348 +1,492 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lista de Tarefas</title>
-  <style>
-    :root {
-      --bg: #0f172a;          /* slate-900 */
-      --panel: #111827;       /* gray-900 */
-      --muted: #94a3b8;       /* slate-400 */
-      --text: #e5e7eb;        /* gray-200 */
-      --accent: #22c55e;      /* green-500 */
-      --accent-2: #3b82f6;    /* blue-500 */
-      --danger: #ef4444;      /* red-500 */
-      --warning: #f59e0b;     /* amber-500 */
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 16px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CREATIVA IA</title>
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
-      background: radial-gradient(1200px 800px at 10% 0%, #1f2937 0%, var(--bg) 40%),
-                  radial-gradient(1000px 600px at 100% 100%, #0b1020 0%, var(--bg) 60%);
-      color: var(--text);
-      display: grid; place-items: center; padding: 24px;
-    }
+<!-- Favicon padrão -->
+<link rel="icon" href="https://i.postimg.cc/GhNBPYBT/favicon-16x16.png" type="image/x-icon">
 
-    .app {
-      width: 100%; max-width: 720px; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius);
-      box-shadow: var(--shadow); backdrop-filter: blur(8px);
-    }
+<!-- Fonte Mohave -->
+<link href="https://fonts.googleapis.com/css2?family=Mohave:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    header { padding: 28px 24px 10px 24px; }
-    header h1 { margin: 0; font-size: 28px; letter-spacing: .5px; }
-    header p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+<style>
+:root {
+  --bg-gradient-light: linear-gradient(135deg, #b9f3ff 0%, #e0faff 100%);
+  --header-bg-light: rgba(255, 255, 255, 0.4);
+  --footer-bg-light: rgba(255, 255, 255, 0.5);
+  --bot-bg-light: rgba(255, 255, 255, 0.6);
+  --user-bg-light: rgba(0, 128, 255, 0.7);
+  --text-color-light: #0a2540;
 
-    .controls { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 16px 24px 8px; }
-    .input {
-      display: flex; gap: 10px; align-items: center; background: #0b1222; border: 1px solid rgba(255,255,255,.08);
-      padding: 10px 12px; border-radius: 12px;
-    }
-    .input input[type="text"] {
-      flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-size: 16px;
-    }
-    .input button { white-space: nowrap; }
+  --bg-gradient-dark: linear-gradient(135deg, #0b1e33 0%, #003459 100%);
+  --header-bg-dark: rgba(30, 41, 59, 0.7);
+  --footer-bg-dark: rgba(30, 41, 59, 0.6);
+  --bot-bg-dark: rgba(255, 255, 255, 0.15);
+  --user-bg-dark: rgba(0, 140, 255, 0.7);
+  --text-color-dark: #e0f2fe;
+}
 
-    button, .chip, .icon-btn {
-      border: none; outline: none; cursor: pointer; border-radius: 12px; padding: 10px 14px; font-weight: 600; color: #0b1222;
-      transition: transform .04s ease, filter .2s ease, background .2s ease, border-color .2s ease;
-      background: var(--accent); box-shadow: 0 6px 18px rgba(34,197,94,.25);
-    }
-    button:active { transform: translateY(1px); }
-    .btn-secondary { background: #182033; color: var(--text); border: 1px solid rgba(255,255,255,.06); box-shadow: none; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Mohave', Arial, sans-serif;
+}
 
-    .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; }
-    .chip { background: #0b1222; color: var(--text); padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.08); }
-    .chip[aria-pressed="true"] { background: var(--accent-2); color: white; border-color: transparent; }
+/* Faz o body ocupar toda a tela corretamente */
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: var(--bg-gradient-light);
+  color: var(--text-color-light);
+  overflow: hidden;
+  transition: 0.4s;
+}
+body.dark {
+  background: var(--bg-gradient-dark);
+  color: var(--text-color-dark);
+}
 
-    .search-wrap { padding: 0 24px 8px; }
-    .search-wrap input { width: 100%; padding: 10px 12px; border-radius: 12px; background: #0b1222; border: 1px solid rgba(255,255,255,.08); color: var(--text); }
+/* Fundo bolhas */
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.bubble {
+  position: absolute;
+  bottom: -150px;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-110vh) scale(1.3); }
+}
 
-    ul#todo-list { list-style: none; margin: 0; padding: 8px 12px 12px; }
-    .item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; }
-    .item + .item { margin-top: 6px; }
-    .item:hover { background: rgba(255,255,255,.04); }
+/* Menu lateral fixo */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* tudo colado no topo */
+  z-index: 2;
+  transition: transform 0.3s ease;
+  padding-top: 10px; /* opcional: dá um leve respiro no topo */
+}
+body.dark #sidebar {
+  background: rgba(30,41,59,0.85);
+}
+#sidebar.hidden {
+  transform: translateX(-100%);
+}
 
-    .check { appearance: none; width: 22px; height: 22px; border-radius: 6px; border: 2px solid #334155; display: grid; place-items: center; cursor: pointer; }
-    .check:checked { background: var(--accent); border-color: var(--accent); }
-    .check:checked::after { content: "✓"; font-weight: 900; color: #05130a; }
+/* Logo */
+#logo {
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+#logo img {
+  max-width: 100%;
+  height: auto;
+}
 
-    .title { font-size: 16px; line-height: 1.3; }
-    .done .title { text-decoration: line-through; color: var(--muted); }
+/* Botões do menu */
+#menuButtons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+#menuButtons button {
+  padding: 15px 20px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+  color: inherit;
+  transition: 0.3s;
+  border-radius: 10px;
+  margin: 5px 10px;
+}
+#menuButtons button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,255,255,0.2);
+  transform: skewX(-20deg);
+  transition: 0.4s;
+  border-radius: 10px;
+}
+#menuButtons button:hover::before {
+  left: 100%;
+}
+#menuButtons button:hover {
+  color: #00f0ff;
+}
 
-    .actions { display: flex; gap: 6px; }
-    .icon-btn { background: #15203a; color: var(--text); padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,.08); }
-    .icon-btn:hover { filter: brightness(1.2); }
-    .icon-btn.warning { background: #2b1c05; border-color: rgba(245, 158, 11, .4); }
-    .icon-btn.danger { background: #2a1214; border-color: rgba(239, 68, 68, .4); }
+/* Perfil do usuário (fixo no final do menu) */
+#userProfile {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-top: auto; /* mantém o perfil fixo no rodapé do menu */
+}
+#userProfile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid #00c6ff;
+}
+#userProfile span {
+  font-weight: bold;
+  font-size: 16px;
+  color: inherit;
+}
 
-    footer { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 12px 24px 24px; color: var(--muted); font-size: 14px; }
-    .count strong { color: var(--text); }
+/* Conteúdo principal ocupa todo o espaço visível à direita do menu */
+#mainContent {
+  flex: 1;
+  margin-left: 250px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: calc(100vw - 250px);
+  overflow: hidden;
+}
+#mainContent.fullWidth {
+  margin-left: 0;
+  width: 100vw;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
 
-    .empty { text-align: center; color: var(--muted); padding: 24px; }
+/* Header sticky */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  padding: 15px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+body.light header { background: var(--header-bg-light); }
+body.dark header { background: var(--header-bg-dark); }
+header button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: inherit;
+  transition: 0.2s;
+}
+header button:hover { transform: scale(1.2); }
+#themeToggle { font-size: 22px; }
 
-    @media (max-width: 520px) {
-      .controls { grid-template-columns: 1fr; }
-      .filters { justify-content: flex-start; }
-    }
-  </style>
+/* Chat ocupa toda altura restante */
+main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Mensagens */
+.message {
+  max-width: 70%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
+  transition: 0.3s;
+}
+body.light .bot { background: var(--bot-bg-light); color: var(--text-color-light); box-shadow: 0 0 12px #00f0ff,0 0 20px #00c6ff66; }
+body.dark .bot { background: var(--bot-bg-dark); color: var(--text-color-dark); box-shadow: 0 0 15px #0ff,0 0 25px #0ff; }
+body.light .user { background: var(--user-bg-light); color: #fff; }
+body.dark .user { background: var(--user-bg-dark); color: #fff; }
+.bot { align-self: flex-start; border-bottom-left-radius: 0; }
+.user { align-self: flex-end; border-bottom-right-radius: 0; }
+
+/* Animação digitação */
+.typing {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #0ff;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+  margin-left: 5px;
+}
+@keyframes blink {
+  0%, 50%, 100% { opacity: 0.3; }
+  25%, 75% { opacity: 1; }
+}
+
+/* Footer */
+footer {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,0.3);
+  z-index: 2;
+}
+body.light footer { background: var(--footer-bg-light); }
+body.dark footer { background: var(--footer-bg-dark); }
+footer input {
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 25px;
+  border: 1px solid rgba(255,255,255,0.3);
+  outline: none;
+  font-size: 15px;
+  backdrop-filter: blur(6px);
+}
+body.light footer input { background: rgba(255,255,255,0.7); color: var(--text-color-light); }
+body.dark footer input { background: rgba(255,255,255,0.15); color: var(--text-color-dark); }
+footer button {
+  margin-left: 10px;
+  background: linear-gradient(135deg,#00c6ff,#0072ff);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 45px;
+  height: 45px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+footer button:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(0,255,255,0.5); }
+#micButton {
+  margin-left: 10px;
+  background: linear-gradient(135deg,#00bfff,#0066ff);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,140,255,0.6);
+  transition: 0.3s;
+}
+#micButton.active { box-shadow: 0 0 20px rgba(0,255,255,0.5); }
+#micButton.active::before,
+#micButton.active::after {
+  content: "";
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,255,255,0.5);
+  animation: pulse 1.2s infinite ease-in-out;
+}
+#micButton.active::after { animation-delay: 0.4s; }
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+</style>
 </head>
-<body>
-  <div class="app" role="application" aria-labelledby="title">
-    <header>
-      <h1 id="title">Lista de Tarefas</h1>
-      <p>Adicione, marque como concluída, edite e filtre. Tudo salvo automaticamente no seu navegador.</p>
-    </header>
 
-    <div class="controls" aria-label="Adicionar tarefa e filtros">
-      <div class="input" role="group" aria-label="Adicionar tarefa">
-        <input id="new-todo" type="text" placeholder="O que precisa fazer? (Enter para adicionar)" autocomplete="off" />
-        <button id="add-btn" aria-label="Adicionar tarefa">Adicionar</button>
-      </div>
-      <div class="filters" role="group" aria-label="Filtros de tarefas">
-        <button class="chip" data-filter="all" aria-pressed="true">Todas</button>
-        <button class="chip" data-filter="active" aria-pressed="false">Ativas</button>
-        <button class="chip" data-filter="done" aria-pressed="false">Concluídas</button>
-      </div>
-    </div>
+<body class="light">
+<div class="background" id="background"></div>
 
-    <div class="search-wrap">
-      <input id="search" type="search" placeholder="Pesquisar tarefas…" aria-label="Pesquisar tarefas" />
-    </div>
-
-    <ul id="todo-list" aria-live="polite" aria-label="Lista de tarefas"></ul>
-
-    <div class="empty" id="empty" hidden>Nenhuma tarefa por aqui… ✨</div>
-
-    <footer>
-      <div class="count">Restantes: <strong id="count">0</strong></div>
-      <div class="footer-actions">
-        <button id="clear-done" class="btn-secondary" aria-label="Limpar concluídas">Limpar concluídas</button>
-        <button id="export" class="btn-secondary" aria-label="Exportar tarefas">Exportar</button>
-        <button id="import" class="btn-secondary" aria-label="Importar tarefas">Importar</button>
-      </div>
-    </footer>
+<!-- Menu lateral -->
+<div id="sidebar">
+  <div id="logo"><img src="https://i.postimg.cc/MpvTvGdG/creativa-logo.png" alt="Logo"></div>
+  <div id="menuButtons">
+    <button onclick="alert('🔍 Pesquisa')">🔍 Pesquisa</button>
+    <button onclick="alert('⚙️ Configurações')">⚙️ Configurações</button>
+    <button onclick="alert('➕ Novo chat')">➕ Novo chat</button>
+    <button onclick="alert('🕑 Histórico')">🕑 Histórico</button>
   </div>
+  <div id="userProfile">
+    <img src="https://i.pravatar.cc/80" alt="Avatar do Usuário">
+    <span>Beatriz Gonçalves</span>
+  </div>
+</div>
 
-  <template id="item-template">
-    <li class="item" draggable="true">
-      <input type="checkbox" class="check" aria-label="Concluir tarefa" />
-      <div class="title" tabindex="0"></div>
-      <div class="actions">
-        <button class="icon-btn" data-action="edit" title="Editar" aria-label="Editar">✎</button>
-        <button class="icon-btn warning" data-action="duplicate" title="Duplicar" aria-label="Duplicar">⧉</button>
-        <button class="icon-btn danger" data-action="delete" title="Excluir" aria-label="Excluir">🗑</button>
-      </div>
-    </li>
-  </template>
+<!-- Conteúdo principal -->
+<div id="mainContent">
+<header>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <button id="toggleSidebar" title="Mostrar/Esconder menu">☰</button>
+    💠 <span>Yuri Sasaki</span>
+  </div>
+  <button id="themeToggle" title="Mudar tema">🌙</button>
+</header>
 
-  <script>
-    (function() {
-      const STORAGE_KEY = 'todos-v1';
-      /** @type {{id:string,text:string,done:boolean,order:number}[]} */
-      let todos = [];
-      let filter = 'all';
-      let searchQuery = '';
+<main id="chatMessages">
+  <div class="message bot">Olá, sou Yuri!<br>Como posso te ajudar hoje? ☺️</div>
+</main>
 
-      // Elements
-      const list = document.getElementById('todo-list');
-      const empty = document.getElementById('empty');
-      const input = document.getElementById('new-todo');
-      const addBtn = document.getElementById('add-btn');
-      const search = document.getElementById('search');
-      const count = document.getElementById('count');
-      const clearDoneBtn = document.getElementById('clear-done');
-      const exportBtn = document.getElementById('export');
-      const importBtn = document.getElementById('import');
+<footer>
+  <input type="text" id="userInput" placeholder="Digite sua mensagem...">
+  <button id="micButton" title="Falar">🎤</button>
+  <button onclick="sendMessage()">➤</button>
+</footer>
 
-      // Load
-      try { todos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { todos = []; }
-      normalizeOrder();
-      render();
+<audio id="sendSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9a2e894d88.mp3?filename=soft-click-111181.mp3" preload="auto"></audio>
+<audio id="receiveSound" src="https://cdn.pixabay.com/download/audio/2022/10/13/audio_f2a542d012.mp3?filename=glass-bubble-124998.mp3" preload="auto"></audio>
 
-      // Events
-      addBtn.addEventListener('click', () => tryAdd());
-      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryAdd(); });
-      search.addEventListener('input', () => { searchQuery = search.value.trim().toLowerCase(); render(); });
+<script>
+const body=document.body;
+const themeToggle=document.getElementById("themeToggle");
+const chatMessages=document.getElementById("chatMessages");
+const userInput=document.getElementById("userInput");
+const sendSound=document.getElementById("sendSound");
+const receiveSound=document.getElementById("receiveSound");
+const micButton=document.getElementById("micButton");
+const toggleSidebar=document.getElementById("toggleSidebar");
+const sidebar=document.getElementById("sidebar");
+const mainContent=document.getElementById("mainContent");
 
-      document.querySelectorAll('.filters .chip').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.filters .chip').forEach(b => b.setAttribute('aria-pressed', 'false'));
-          btn.setAttribute('aria-pressed', 'true');
-          filter = btn.dataset.filter;
-          render();
-        });
-      });
+sendSound.volume=0.3; receiveSound.volume=0.35;
 
-      clearDoneBtn.addEventListener('click', () => {
-        todos = todos.filter(t => !t.done);
-        save();
-        render();
-      });
+// Alternar tema
+themeToggle.addEventListener("click",()=>{
+  if(body.classList.contains("light")){
+    body.classList.replace("light","dark");
+    themeToggle.textContent="🔆";
+  } else {
+    body.classList.replace("dark","light");
+    themeToggle.textContent="🌙";
+  }
+});
 
-      exportBtn.addEventListener('click', () => {
-        const blob = new Blob([JSON.stringify(todos, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = 'tarefas.json'; a.click();
-        URL.revokeObjectURL(url);
-      });
+// Toggle sidebar
+toggleSidebar.addEventListener("click",()=>{
+  sidebar.classList.toggle("hidden");
+  mainContent.classList.toggle("fullWidth");
+});
 
-      importBtn.addEventListener('click', async () => {
-        const inputFile = document.createElement('input');
-        inputFile.type = 'file';
-        inputFile.accept = 'application/json';
-        inputFile.onchange = () => {
-          const file = inputFile.files[0]; if (!file) return;
-          const reader = new FileReader();
-          reader.onload = () => {
-            try {
-              const data = JSON.parse(reader.result);
-              if (Array.isArray(data)) {
-                todos = data.map((t, i) => ({ id: uid(), text: String(t.text ?? ''), done: !!t.done, order: i }));
-                save();
-                render();
-              } else alert('Arquivo inválido.');
-            } catch { alert('Não foi possível ler o arquivo.'); }
-          };
-          reader.readAsText(file);
-        };
-        inputFile.click();
-      });
+// Enviar mensagem
+function sendMessage(){
+  const text=userInput.value.trim(); if(!text) return;
+  const userMsg=document.createElement("div");
+  userMsg.classList.add("message","user");
+  userMsg.textContent=text;
+  chatMessages.appendChild(userMsg);
+  sendSound.currentTime=0; sendSound.play();
 
-      // Drag & Drop reorder
-      let dragId = null;
-      list.addEventListener('dragstart', (e) => {
-        const li = e.target.closest('li.item');
-        if (!li) return;
-        dragId = li.dataset.id;
-        e.dataTransfer.effectAllowed = 'move';
-      });
-      list.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        const over = e.target.closest('li.item');
-        if (!over || over.dataset.id === dragId) return;
-        const dragIdx = todos.findIndex(t => t.id === dragId);
-        const overIdx = todos.findIndex(t => t.id === over.dataset.id);
-        const draggingDown = dragIdx < overIdx;
-        list.insertBefore(document.querySelector(`li.item[data-id="${dragId}"]`), draggingDown ? over.nextSibling : over);
-      });
-      list.addEventListener('drop', () => {
-        const items = [...list.querySelectorAll('li.item')];
-        items.forEach((li, i) => {
-          const todo = todos.find(t => t.id === li.dataset.id);
-          if (todo) todo.order = i;
-        });
-        todos.sort((a,b)=>a.order-b.order);
-        save();
-      });
+  const typing=document.createElement("div");
+  typing.classList.add("message","bot");
+  typing.innerHTML="💬 Yuri está digitando <span class='typing'></span><span class='typing'></span><span class='typing'></span>";
+  chatMessages.appendChild(typing);
+  chatMessages.scrollTop=chatMessages.scrollHeight;
 
-      function tryAdd() {
-        const text = input.value.trim();
-        if (!text) return;
-        todos.push({ id: uid(), text, done: false, order: todos.length });
-        input.value = '';
-        save();
-        render(true);
-      }
+  setTimeout(()=>{
+    typing.remove();
+    const botMsg=document.createElement("div");
+    botMsg.classList.add("message","bot");
+    botMsg.innerHTML="💬 "+gerarRespostaFake(text);
+    chatMessages.appendChild(botMsg);
+    chatMessages.scrollTop=chatMessages.scrollHeight;
+    receiveSound.currentTime=0;
+    receiveSound.play();
+  },1000);
 
-      function render(focusLast=false) {
-        const frag = document.createDocumentFragment();
-        const template = document.getElementById('item-template');
-        const filtered = todos
-          .filter(t => filter === 'all' || (filter === 'active' ? !t.done : t.done))
-          .filter(t => t.text.toLowerCase().includes(searchQuery))
-          .sort((a,b) => a.order - b.order);
+  userInput.value="";
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+}
 
-        list.innerHTML = '';
-        filtered.forEach(t => {
-          const node = template.content.cloneNode(true);
-          const li = node.querySelector('li');
-          li.dataset.id = t.id;
-          if (t.done) li.classList.add('done');
+// Quando for integrar api, não substuir essa função, apenas chamar a api dentro dela e retornar a resposta dela.
+// Exemplo: "O meu nome completo siginifica Lírio, trabalhador ou luz de Deus (Yuri) e Ajuda ou Assistência (Sasaki) 😊"
+// este deve ficar na api bem gravada, os outros são apenas exemplos que podem ser alterados ou removidos.
 
-          const check = node.querySelector('.check');
-          check.checked = t.done;
-          check.addEventListener('change', () => toggle(t.id));
+function gerarRespostaFake(text){
+  const respostas=[
+    "Interessante! 🌿 Me conte mais sobre isso.",
+    "Adoro o seu jeito de pensar 💎",
+    "O meu nome completo siginifica Lírio, trabalhador ou luz de Deus (Yuri) e Ajuda ou Assistência (Sasaki) 😊",
+    "Posso te mostrar algo relacionado 🌐",
+    "Legal 😄 Quer explorar mais esse assunto?"
+  ];
+  return respostas[Math.floor(Math.random()*respostas.length)];
+}
+userInput.addEventListener("keypress", e=>{if(e.key==="Enter") sendMessage();});
 
-          const title = node.querySelector('.title');
-          title.textContent = t.text;
-          title.addEventListener('dblclick', () => startEdit(li, t));
-          title.addEventListener('keydown', (e) => { if (e.key === 'Enter') startEdit(li, t); });
+// Bolhas de fundo
+function criarBolhas(){for(let i=0;i<15;i++) criarUmaBolha();}
+function criarUmaBolha(){
+  const bubble=document.createElement("div");
+  bubble.classList.add("bubble");
+  const size=Math.random()*80+40;
+  bubble.style.width=size+"px";
+  bubble.style.height=size+"px";
+  bubble.style.left=Math.random()*100+"%";
+  bubble.style.animationDuration=10+Math.random()*15+"s";
+  bubble.style.background=`radial-gradient(circle at 30% 30%, rgba(${100+Math.random()*155},${150+Math.random()*105},255,0.8), transparent 70%)`;
+  document.getElementById("background").appendChild(bubble);
+  bubble.addEventListener("animationend",()=>{bubble.remove(); criarUmaBolha();});
+}
+criarBolhas();
 
-          node.querySelector('[data-action="edit"]').addEventListener('click', () => startEdit(li, t));
-          node.querySelector('[data-action="duplicate"]').addEventListener('click', () => duplicate(t.id));
-          node.querySelector('[data-action="delete"]').addEventListener('click', () => remove(t.id));
-
-          frag.appendChild(node);
-        });
-        list.appendChild(frag);
-
-        const remaining = todos.filter(t => !t.done).length;
-        count.textContent = remaining;
-        empty.hidden = filtered.length !== 0;
-
-        if (focusLast) {
-          const last = list.lastElementChild?.querySelector('.title');
-          last?.focus();
-        }
-      }
-
-      function startEdit(li, todo) {
-        const current = li.querySelector('.title');
-        const input = document.createElement('input');
-        input.type = 'text'; input.value = todo.text; input.className = 'title'; input.style.background = 'transparent';
-        li.replaceChild(input, current);
-        input.focus(); input.select();
-
-        const commit = () => {
-          const v = input.value.trim();
-          if (!v) { remove(todo.id); return; }
-          todo.text = v; save(); render();
-        };
-        input.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') commit();
-          if (e.key === 'Escape') render();
-        });
-        input.addEventListener('blur', commit);
-      }
-
-      function toggle(id) {
-        const t = todos.find(x => x.id === id);
-        if (!t) return; t.done = !t.done; save(); render();
-      }
-
-      function remove(id) {
-        const idx = todos.findIndex(x => x.id === id);
-        if (idx >= 0) { todos.splice(idx,1); normalizeOrder(); save(); render(); }
-      }
-
-      function duplicate(id) {
-        const t = todos.find(x => x.id === id);
-        if (!t) return;
-        const copy = { ...t, id: uid(), text: t.text + ' (cópia)', order: (t.order ?? 0) + 0.5 };
-        todos.push(copy);
-        reindexOrder();
-        save();
-        render(true);
-      }
-
-      function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(todos)); }
-
-      function uid() { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4); }
-
-      function normalizeOrder() {
-        todos.sort((a,b)=> (a.order ?? 0) - (b.order ?? 0));
-        reindexOrder();
-      }
-      function reindexOrder() { todos.forEach((t,i)=> t.order = i); }
-    })();
-  </script>
+// Reconhecimento de voz
+let recognition;
+if('webkitSpeechRecognition' in window){
+  recognition=new webkitSpeechRecognition();
+  recognition.lang="pt-BR";
+  recognition.continuous=false;
+  recognition.interimResults=false;
+  micButton.addEventListener("click",()=>{
+    if(micButton.classList.contains("active")){
+      recognition.stop();
+      micButton.classList.remove("active");
+    } else {
+      recognition.start();
+      micButton.classList.add("active");
+    }
+  });
+  recognition.onresult=(event)=>{
+    userInput.value=event.results[0][0].transcript;
+    sendMessage();
+  }
+  recognition.onend=()=>{micButton.classList.remove("active");}
+} else {
+  micButton.style.display="none";
+}
+</script>
+<!--Rodapé que contém os participantes do trabalho, não alterar!-->
+ <footer class="mohave">
+    <p>&copy; CREATIVA AI 2025! (Beatriz, Wigna, Nicolas, Pedro, Erick, Jhonatan e Henrique) Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
-
+</body>
+</html>
