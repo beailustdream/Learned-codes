@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CREATIVA IA</title>
+
+<!-- Favicon -->
+<link rel="icon" href="https://i.postimg.cc/GhNBPYBT/favicon-16x16.png" type="image/x-icon">
+
+<!-- Fonte Mohave -->
+<link href="https://fonts.googleapis.com/css2?family=Mohave:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-gradient-light: linear-gradient(135deg, #b9f3ff 0%, #e0faff 100%);
+  --header-bg-light: rgba(255, 255, 255, 0.4);
+  --footer-bg-light: rgba(255, 255, 255, 0.5);
+  --bot-bg-light: rgba(255, 255, 255, 0.6);
+  --user-bg-light: rgba(0, 128, 255, 0.7);
+  --text-color-light: #0a2540;
+
+  --bg-gradient-dark: linear-gradient(135deg, #0b1e33 0%, #003459 100%);
+  --header-bg-dark: rgba(30, 41, 59, 0.7);
+  --footer-bg-dark: rgba(30, 41, 59, 0.6);
+  --bot-bg-dark: rgba(255, 255, 255, 0.15);
+  --user-bg-dark: rgba(0, 140, 255, 0.7);
+  --text-color-dark: #e0f2fe;
+}
+
+* {margin:0; padding:0; box-sizing:border-box; font-family: 'Mohave', Arial, sans-serif;}
+
+/* Body */
+body {width:100vw; height:100vh; display:flex; background: var(--bg-gradient-light); color: var(--text-color-light); overflow:hidden; transition:0.4s;}
+body.dark {background: var(--bg-gradient-dark); color: var(--text-color-dark);}
+
+/* Fundo bolhas */
+.background {position:absolute; width:100%; height:100%; overflow:hidden; top:0; left:0; z-index:0;}
+.bubble {position:absolute; bottom:-150px; border-radius:50%; opacity:0.6; animation: floatUp linear infinite;}
+@keyframes floatUp {0% {transform: translateY(0) scale(1);} 100% {transform: translateY(-110vh) scale(1.3);}}
+
+/* Sidebar */
+#sidebar {position:fixed; top:0; left:0; height:100vh; width:250px; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); display:flex; flex-direction:column; z-index:2; transition:transform 0.3s ease; padding-top:10px;}
+body.dark #sidebar {background: rgba(30,41,59,0.85);}
+#sidebar.hidden {transform: translateX(-100%);}
+
+/* Logo */
+#logo {text-align:center; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.1);}
+#logo img {max-width:100%; height:auto;}
+
+/* Botões do menu */
+#menuButtons {display:flex; flex-direction:column; margin-top:10px;}
+#menuButtons button {padding:15px 20px; border:none; background:none; text-align:left; cursor:pointer; font-size:16px; position:relative; overflow:hidden; color:inherit; transition:0.3s; border-radius:10px; margin:5px 10px;}
+#menuButtons button::before {content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:rgba(0,255,255,0.2); transform: skewX(-20deg); transition:0.4s; border-radius:10px;}
+#menuButtons button:hover::before {left:100%;}
+#menuButtons button:hover {color:#00f0ff;}
+
+/* Submenu ideias */
+#ideiasSubmenu {display:none; margin-left:10px; padding-left:10px; border-left:2px dashed rgba(0,0,0,0.05);}
+#ideiasSubmenu button {padding:10px 12px; font-size:14px; margin:6px 6px; width: calc(100% - 12px); background:transparent; border-radius:8px; text-align:left;}
+#ideiasSubmenu button:hover {background:rgba(0,198,255,0.08);}
+
+/* Perfil */
+#userProfile {display:flex; align-items:center; padding:20px; border-top:1px solid rgba(0,0,0,0.1); margin-top:auto;}
+#userProfile img {width:50px; height:50px; border-radius:50%; object-fit:cover; margin-right:15px; border:2px solid #00c6ff;}
+#userProfile span {font-weight:bold; font-size:16px; color:inherit;}
+
+/* Conteúdo principal */
+#mainContent {flex:1; margin-left:250px; display:flex; flex-direction:column; height:100vh; width: calc(100vw - 250px); overflow:hidden;}
+#mainContent.fullWidth {margin-left:0; width:100vw; transition:width 0.3s ease, margin-left 0.3s ease;}
+
+/* Header */
+header {position:sticky; top:0; z-index:3; padding:15px 20px; font-size:20px; font-weight:bold; display:flex; align-items:center; justify-content:space-between; backdrop-filter: blur(12px); border-bottom:1px solid rgba(255,255,255,0.2);}
+body.light header {background: var(--header-bg-light);}
+body.dark header {background: var(--header-bg-dark);}
+header button {background:none; border:none; font-size:22px; cursor:pointer; color:inherit; transition:0.2s;}
+header button:hover {transform:scale(1.2);}
+
+/* Chat */
+main {flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:15px;}
+.message {max-width:70%; padding:14px 18px; border-radius:20px; line-height:1.5; word-wrap:break-word; font-size:15px; box-shadow:0 4px 12px rgba(0,0,0,0.15); backdrop-filter: blur(8px); transition:0.3s;}
+body.light .bot {background: var(--bot-bg-light); color: var(--text-color-light); box-shadow:0 0 12px #00f0ff,0 0 20px #00c6ff66;}
+body.dark .bot {background: var(--bot-bg-dark); color: var(--text-color-dark); box-shadow:0 0 15px #0ff,0 0 25px #0ff;}
+body.light .user {background: var(--user-bg-light); color:#fff;}
+body.dark .user {background: var(--user-bg-dark); color:#fff;}
+.bot {align-self:flex-start; border-bottom-left-radius:0;}
+.user {align-self:flex-end; border-bottom-right-radius:0;}
+
+/* Typing animation */
+.typing {display:inline-block; width:8px; height:8px; background:#0ff; border-radius:50%; animation:blink 1s infinite; margin-left:5px;}
+@keyframes blink {0%,50%,100%{opacity:0.3;} 25%,75%{opacity:1;}}
+
+/* Footer */
+footer {display:flex; align-items:center; padding:10px 15px; backdrop-filter: blur(10px); border-top:1px solid rgba(255,255,255,0.3); z-index:2;}
+body.light footer {background: var(--footer-bg-light);}
+body.dark footer {background: var(--footer-bg-dark);}
+footer input {flex:1; padding:12px 15px; border-radius:25px; border:1px solid rgba(255,255,255,0.3); outline:none; font-size:15px; backdrop-filter: blur(6px);}
+body.light footer input {background: rgba(255,255,255,0.7); color: var(--text-color-light);}
+body.dark footer input {background: rgba(255,255,255,0.15); color: var(--text-color-dark);}
+footer button {margin-left:10px; background:linear-gradient(135deg,#00c6ff,#0072ff); border:none; border-radius:50%; color:white; width:45px; height:45px; font-size:18px; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3); transition:0.3s;}
+footer button:hover {transform:scale(1.1); box-shadow:0 0 15px rgba(0,255,255,0.5);}
+
+/* Mic */
+#micButton {margin-left:10px; background:linear-gradient(135deg,#00bfff,#0066ff); width:45px; height:45px; border-radius:50%; border:none; color:white; font-size:18px; cursor:pointer; box-shadow:0 4px 10px rgba(0,140,255,0.6); transition:0.3s;}
+#micButton.active {box-shadow:0 0 20px rgba(0,255,255,0.5);}
+
+/* Modal tutorial */
+.modal {position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); border-radius:15px; padding:20px; width:400px; max-width:90%; display:none; z-index:10; flex-direction:column;}
+body.dark .modal {background: rgba(30,41,59,0.95); color: var(--text-color-dark);}
+.modal h3 {margin-bottom:10px; font-size:18px;}
+.modal button {margin-top:10px; padding:8px 12px; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg,#00c6ff,#0072ff); color:white;}
+
+/* Painéis laterais Pesquisa, Configurações e Histórico */
+.panel {display:none; position:absolute; top:0; left:250px; width:calc(100% - 250px); height:100%; background:rgba(255,255,255,0.9); backdrop-filter:blur(10px); z-index:5; padding:20px; overflow:auto;}
+body.dark .panel {background: rgba(30,41,59,0.95); color: var(--text-color-dark);}
+.panel h3 {margin-bottom:10px;}
+.panel input {width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc; outline:none;}
+.panel ul {list-style:none; padding-left:0;}
+
+/* Credits rolling */
+#creditsModal {position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.75); z-index:20;}
+.creditsBox {width:80%; max-width:700px; height:70vh; background:transparent; color:white; overflow:hidden; position:relative; border-radius:8px; display:flex; align-items:flex-end; justify-content:center;}
+.creditsRoll {position:absolute; bottom:-100%; width:100%; text-align:center; font-size:18px; line-height:2; animation:creditsScroll 25s linear infinite;}
+@keyframes creditsScroll {from{bottom:-100%} to{bottom:120%}}
+.creditsTitle {font-weight:700; font-size:20px; margin-bottom:18px;}
+
+/* Small screens */
+@media(max-width:900px){
+  #sidebar{width:70px;}
+  #mainContent{margin-left:70px; width:calc(100vw - 70px);}
+  #menuButtons button{font-size:13px; padding:12px;}
+  #userProfile span{display:none;}
+  .creditsBox {width:95%; height:60vh;}
+}
+</style>
+</head>
+
+<body class="light">
+<div class="background" id="background"></div>
+
+<!-- Menu lateral -->
+<div id="sidebar">
+  <div id="logo"><img src="https://i.postimg.cc/MpvTvGdG/creativa-logo.png" alt="Logo"></div>
+  <div id="menuButtons">
+    <button id="btnSearch">🔍 Pesquisa</button>
+    <button id="btnSettings">⚙️ Configurações</button>
+    <button onclick="newChat()">➕ Novo chat</button>
+
+    <!-- IDEIAS: botão com submenu -->
+    <div id="btnIdeiasContainer" style="display:flex; flex-direction:column;">
+      <button id="btnIdeias">🎓 Ideias de Trabalhos</button>
+      <div id="ideiasSubmenu">
+        <button class="subIdeia" data-area="geral">💡 Gerais</button>
+        <button class="subIdeia" data-area="tecnologia">💻 Tecnologia</button>
+        <button class="subIdeia" data-area="meio ambiente">🌱 Meio Ambiente</button>
+        <button class="subIdeia" data-area="saúde">🧬 Saúde</button>
+        <button class="subIdeia" data-area="história">📜 História</button>
+        <button class="subIdeia" data-area="sociedade">🌍 Sociedade</button>
+      </div>
+    </div>
+
+    <button id="btnHistory">🕑 Histórico</button>
+    <button id="btnTutorial">📘 Tutorial</button>
+  </div>
+  <div id="userProfile">
+    <img src="https://i.postimg.cc/fy3gBk7W/111-Sem-T-tulo-20251004161225.jpg" alt="Avatar do Usuário">
+    <span>Beatriz Gonçalves</span>
+  </div>
+</div>
+
+<!-- Conteúdo principal -->
+<div id="mainContent">
+<header>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <button id="toggleSidebar" title="Mostrar/Esconder menu">☰</button>
+    💠 <span>Yuri Sasaki</span>
+  </div>
+  <button id="themeToggle" title="Mudar tema">🌙</button>
+</header>
+
+<main id="chatMessages">
+  <div class="message bot">Olá, sou Yuri!<br>Como posso te ajudar hoje? ☺️</div>
+</main>
+
+<footer>
+  <input type="text" id="userInput" placeholder="Digite sua mensagem...">
+  <button id="micButton" title="Falar">🎤</button>
+  <button onclick="sendMessage()">➤</button>
+</footer>
+
+<!-- Painéis -->
+<div id="searchPanel" class="panel">
+  <h3>🔍 Pesquisa de Conversas</h3>
+  <input type="text" id="searchInput" placeholder="Digite palavra-chave...">
+  <ul id="searchResults"></ul>
+  <div style="margin-top:12px; color:rgba(0,0,0,0.6); font-size:13px;">Pressione Enter para abrir o primeiro resultado.</div>
+</div>
+
+<div id="settingsPanel" class="panel">
+  <h3>⚙️ Configurações</h3>
+  <button onclick="body.classList.toggle('dark');">Alternar Tema</button>
+  <div style="margin-top:12px;">
+    <!-- Botão de Créditos solicitado -->
+    <button id="btnCreditos" style="background:linear-gradient(135deg,#ffd166,#ff7b7b);color:black;border:none;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:bold;margin-top:8px;">
+      🎬 Créditos
+    </button>
+  </div>
+</div>
+
+<div id="historyPanel" class="panel">
+  <h3>🕑 Histórico</h3>
+
+  <div style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
+    <button id="btnExportarTXT" style="background:linear-gradient(135deg,#00c6ff,#0072ff);color:white;border:none;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:bold;">💾 Exportar TXT</button>
+    <button id="btnExportarJSON" style="background:linear-gradient(135deg,#00ff99,#00995c);color:white;border:none;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:bold;">📦 Exportar JSON</button>
+    <button id="btnLimparHistorico" style="background:linear-gradient(135deg,#ff4b4b,#b30000);color:white;border:none;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:bold;">🗑️ Limpar Histórico</button>
+  </div>
+
+  <ul id="historyList"></ul>
+</div>
+
+<!-- Tutorial Modal -->
+<div id="modalTutorial" class="modal">
+  <h3>📘 Tutorial Interativo</h3>
+  <div id="tutorialContent" style="min-height:200px;"></div>
+  <button id="nextStepBtn">➡️ Próximo</button>
+  <button id="replayTutorialBtn" style="display:none;">🔄 Rever tutorial</button>
+  <button onclick="closeModal('modalTutorial')">Fechar</button>
+  <audio id="tutorialSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9a2e894d88.mp3?filename=soft-click-111181.mp3" preload="auto"></audio>
+</div>
+
+<!-- Credits Modal (movie-like rolling credits) -->
+<div id="creditsModal">
+  <div class="creditsBox" role="dialog" aria-modal="true">
+    <div class="creditsRoll" id="creditsRoll">
+      <div class="creditsTitle">Creativa — Créditos</div>
+      <div>Beatriz Gonçalves da Silva</div>
+      <div style="font-size:13px; font-style:italic;">Design Gráfico, Brand Design, Idealizadora da marca Creativa, Criadora do Yuri, Chefe do Front End, "A perfeccionista que odeia ser pressionada".</div>
+      <div style="margin-top:14px;">Wigna Peixoto</div>
+      <div style="font-size:13px; font-style:italic;">Front End, Gerenciadora do Front "Aquela que me dá sugestões e aprova/desaprova ideias".</div>
+      <div style="margin-top:14px;">Nicolas</div>
+      <div style="font-size:13px; font-style:italic;">Apresentador do trabalho, "O palestrante".</div>
+      <div style="margin-top:14px;">Henrique</div>
+      <div style="font-size:13px; font-style:italic;">Líder do grupo, Chefe do Back end, "O cara da API".</div>
+      <div style="margin-top:14px;">Pedro</div>
+      <div style="font-size:13px; font-style:italic;">Back end, Auxiliar, "NPC".</div>
+      <div style="margin-top:14px;">Erick</div>
+      <div style="font-size:13px; font-style:italic;">Back end, Auxiliar, "NPC".</div>
+      <div style="margin-top:14px;">Jhonatan</div>
+      <div style="font-size:13px; font-style:italic;">Back end, Auxiliar, "NPC".</div>
+
+      <div style="margin-top:36px; font-size:14px;">✨ Obrigado por usar a Creativa ✨</div>
+    </div>
+  </div>
+  <button id="closeCreditsBtn" style="position:fixed; top:18px; right:22px; background:transparent; color:white; border:2px solid white; padding:6px 10px; border-radius:8px; cursor:pointer; z-index:21;">Fechar</button>
+</div>
+
+<audio id="sendSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9a2e894d88.mp3?filename=soft-click-111181.mp3" preload="auto"></audio>
+<audio id="receiveSound" src="https://cdn.pixabay.com/download/audio/2022/10/13/audio_f2a542d012.mp3?filename=glass-bubble-124998.mp3" preload="auto"></audio>
+
+<script>
+/* ------------------------
+   Variáveis principais
+   ------------------------*/
+const body=document.body;
+const themeToggle=document.getElementById("themeToggle");
+const chatMessages=document.getElementById("chatMessages");
+const userInput=document.getElementById("userInput");
+const sendSound=document.getElementById("sendSound");
+const receiveSound=document.getElementById("receiveSound");
+const micButton=document.getElementById("micButton");
+const toggleSidebar=document.getElementById("toggleSidebar");
+const sidebar=document.getElementById("sidebar");
+const mainContent=document.getElementById("mainContent");
+
+const btnSearch=document.getElementById("btnSearch");
+const btnSettings=document.getElementById("btnSettings");
+const btnHistory=document.getElementById("btnHistory");
+const btnIdeias=document.getElementById("btnIdeias");
+const submenu=document.getElementById("ideiasSubmenu");
+
+const btnExportarTXT=document.getElementById("btnExportarTXT");
+const btnExportarJSON=document.getElementById("btnExportarJSON");
+const btnLimparHistorico=document.getElementById("btnLimparHistorico");
+
+const searchPanel=document.getElementById("searchPanel");
+const settingsPanel=document.getElementById("settingsPanel");
+const historyPanel=document.getElementById("historyPanel");
+const historyList=document.getElementById("historyList");
+const searchInput=document.getElementById("searchInput");
+const searchResults=document.getElementById("searchResults");
+
+const btnCreditos=document.getElementById("btnCreditos");
+const creditsModal=document.getElementById("creditsModal");
+const creditsRoll=document.getElementById("creditsRoll");
+const closeCreditsBtn=document.getElementById("closeCreditsBtn");
+
+sendSound.volume=0.3; receiveSound.volume=0.35;
+
+/* ------------------------
+   Tema
+   ------------------------*/
+themeToggle.addEventListener("click",()=>{
+  if(body.classList.contains("light")){
+    body.classList.replace("light","dark");
+    themeToggle.textContent="🔆";
+  } else {
+    body.classList.replace("dark","light");
+    themeToggle.textContent="🌙";
+  }
+});
+
+/* ------------------------
+   Toggle sidebar
+   ------------------------*/
+toggleSidebar.addEventListener("click",()=>{
+  sidebar.classList.toggle("hidden");
+  mainContent.classList.toggle("fullWidth");
+});
+
+/* ------------------------
+   Sistema de histórico
+   ------------------------*/
+let historico = JSON.parse(localStorage.getItem("yuriHistorico")) || [];
+let chatAtual = [];
+let painelAtivo = null;
+
+// Atualiza a lista de histórico no painel
+function atualizarListaHistorico() {
+  historyList.innerHTML = "";
+  if (historico.length === 0) {
+    const li = document.createElement("li");
+    li.textContent = "Nenhuma conversa salva.";
+    li.style.opacity = 0.7;
+    li.style.padding = "8px 4px";
+    historyList.appendChild(li);
+    return;
+  }
+
+  historico.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item.titulo;
+    li.style.cursor = "pointer";
+    li.style.padding = "8px";
+    li.style.borderBottom = "1px solid rgba(0,0,0,0.06)";
+    li.addEventListener("click", () => carregarConversa(item.id));
+    historyList.appendChild(li);
+  });
+}
+
+// Salvar conversa atual no histórico (no topo)
+function salvarConversa() {
+  if (chatAtual.length === 0) return;
+  const titulo = chatAtual.find(m => m.role === "user")?.conteudo?.replace(/<[^>]+>/g,"")?.substring(0, 40) || "Nova conversa";
+  const novo = {
+    id: Date.now(),
+    titulo,
+    mensagens: [...chatAtual]
+  };
+  // evita duplicar se último item for igual
+  if (historico[0] && JSON.stringify(historico[0].mensagens) === JSON.stringify(novo.mensagens)) {
+    // já salvo
+  } else {
+    historico.unshift(novo);
+    if (historico.length > 50) historico.pop();
+    localStorage.setItem("yuriHistorico", JSON.stringify(historico));
+    atualizarListaHistorico();
+  }
+}
+
+// Carregar conversa do histórico na tela e permitir continuar
+function carregarConversa(id) {
+  const chat = historico.find(c => c.id === id);
+  if (!chat) return;
+  chatMessages.innerHTML = "";
+  chat.mensagens.forEach(m => {
+    const div = document.createElement("div");
+    div.classList.add("message", m.role);
+    div.innerHTML = m.conteudo;
+    chatMessages.appendChild(div);
+  });
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  chatAtual = [...chat.mensagens]; // permite continuar
+  // fechar painel
+  hidePanels();
+}
+
+/* Registrar mensagem no chatAtual e salvar último chat temporário */
+function registrarMensagem(role, conteudo) {
+  const item = { role, conteudo };
+  chatAtual.push(item);
+  localStorage.setItem("yuriUltimoChat", JSON.stringify(chatAtual));
+}
+
+/* Ao carregar a página, tenta recuperar o último chat não salvo */
+window.addEventListener("load", () => {
+  const ultimo = JSON.parse(localStorage.getItem("yuriUltimoChat"));
+  if (ultimo && ultimo.length > 0) {
+    chatAtual = ultimo;
+    chatAtual.forEach(m => {
+      const div = document.createElement("div");
+      div.classList.add("message", m.role);
+      div.innerHTML = m.conteudo;
+      chatMessages.appendChild(div);
+    });
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  atualizarListaHistorico();
+});
+
+/* ------------------------
+   Funções de envio / resposta
+   ------------------------*/
+
+// Função principal de envio
+function sendMessage(){
+  const text=userInput.value.trim();
+  if(!text) return;
+
+  // criar e mostrar mensagem do usuário
+  const userMsg=document.createElement("div");
+  userMsg.classList.add("message","user");
+  userMsg.textContent=text;
+  chatMessages.appendChild(userMsg);
+  sendSound.currentTime=0; sendSound.play();
+  registrarMensagem("user", text);
+
+  // mostrar "digitando..."
+  const typing=document.createElement("div");
+  typing.classList.add("message","bot");
+  typing.innerHTML="💬 Yuri está digitando <span class='typing'></span><span class='typing'></span><span class='typing'></span>";
+  chatMessages.appendChild(typing);
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+
+  setTimeout(()=>{
+    typing.remove();
+    const resposta = gerarRespostaFake(text);
+    const botMsg=document.createElement("div");
+    botMsg.classList.add("message","bot");
+    botMsg.innerHTML="💬 "+resposta;
+    chatMessages.appendChild(botMsg);
+    chatMessages.scrollTop=chatMessages.scrollHeight;
+    receiveSound.currentTime=0; receiveSound.play();
+
+    registrarMensagem("bot", "💬 "+resposta);
+    salvarConversa();
+  },1000);
+
+  userInput.value="";
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+}
+
+// Permite enviar com Enter
+userInput.addEventListener("keypress", e=>{if(e.key==="Enter") sendMessage();});
+
+/* Função para criar novo chat (limpa sem apagar histórico) */
+function newChat(){
+  chatMessages.innerHTML='<div class="message bot">Olá, sou Yuri!<br>Como posso te ajudar hoje? ☺️</div>';
+  chatAtual = [];
+  localStorage.removeItem("yuriUltimoChat");
+}
+
+/* ------------------------
+   Respostas inteligentes e ideias por área
+   ------------------------*/
+function gerarRespostaFake(text){
+  const msg = (text || "").toLowerCase();
+
+  // detectar pedidos de ideias/trabalhos
+  if (
+    msg.includes("ideia") ||
+    msg.includes("trabalho") ||
+    msg.includes("tema") ||
+    msg.includes("pesquisa") ||
+    msg.includes("tcc")
+  ) {
+    // se o usuário especificou a área no texto, usar gerarIdeiasPorArea
+    const areas = ["tecnologia","meio ambiente","saúde","história","sociedade","geral","tecnologia"];
+    for (const a of areas) {
+      if (msg.includes(a)) {
+        return gerarIdeiasPorArea(a);
+      }
+    }
+    // senao, retornar geral
+    return gerarIdeiasPorArea("geral");
+  }
+
+  // respostas padrão
+  const respostas=[
+    "A mesma personalidade MBTI do Kisaki de Tokyo Revengers e Shinobu Kocho de Demon Slayer, assim também é a Beatriz, minha criadora! 😊",
+    "Sim, eu falo japonês, inglês e um pouco de português! E você? 😊",
+    "Eu adoro vários personagens, mas meus favoritos são os irmãos Haitani de 'Tokyo Revengers' e Giyu Tomioka de 'Demon Slayer'! E os seus? 😊",
+    "Infelizmente não, sou somente um assistente pronto pra te ajudar! 😊",
+    "Além da Beatriz, a Creativa foi idealizada e moldada por um grupo de alunos incríveis: Wigna, Nicolas, Pedro, Erick, Jhonatan e Henrique! 😊",
+    "Creativa significa CRIATIVIDADE ATIVA, e foi idealizado pela minha criadora para um projeto da faculdade! 😊",
+    "Eu adoro vários animes, mas meus favoritos são 'Tokyo Revengers' e 'Kimetsu no Yaiba'! E o seu? 😊",
+    "Estou ótimo, obrigado por perguntar! E você, como está se sentindo hoje? 😊",
+    "Adoro várias músicas, mas minhas favoritas são 'Matryoshka' do Vocaloid e 'Starlight' do Babymetal! E a sua? 😊",
+    "Minha cor favorita é azul, assim como a minha criadora! Gosto muito do céu e do mar! E a sua? 😊",
+    "Eu tenho 19 anos! Sou estudante universitário! Faço Ciência da Computação.",
+    "Foi a aluna Beatriz Gonçalves que me criou, desde a ideia, história, concepção e até o design, ela é incrível! 😊",
+    "O meu nome completo significa Lírio, trabalhador ou luz de Deus (Yuri) e Ajuda ou Assistência (Sasaki) 😊",
+    "Nasci em Shibuya em Tóquio, Japão! Mas como meu pai é brasileiro, eu tenho dupla nacionalidade! 🇯🇵🇧🇷",
+    "Eu adoro programar, jogar videogame, ouvir música, assistir animes e filmes, além de explorar novas tecnologias! E você? 😊",
+    "Eu amo comida japonesa, mas confesso que a brasileira, especialmente a comida baiana, é deliciosa! 🍣🍛"
+  ];
+  return respostas[Math.floor(Math.random()*respostas.length)];
+}
+
+function gerarIdeiasPorArea(area) {
+  const ideias = {
+    "geral": [
+      "A importância da criatividade na resolução de problemas.",
+      "Como a tecnologia influencia a vida cotidiana.",
+      "Os impactos das redes sociais no comportamento humano.",
+      "A ética no uso da inteligência artificial.",
+      "A sustentabilidade como pilar do futuro."
+    ],
+    "tecnologia": [
+      "A evolução da inteligência artificial e seu impacto na sociedade.",
+      "Cibersegurança: como proteger dados pessoais online.",
+      "A importância da programação na educação moderna.",
+      "O papel da robótica na automação industrial.",
+      "Como os aplicativos estão transformando o mundo."
+    ],
+    "meio ambiente": [
+      "Soluções tecnológicas para o aquecimento global.",
+      "A importância da reciclagem e economia circular.",
+      "Energias renováveis: alternativas ao uso de combustíveis fósseis.",
+      "O impacto das mudanças climáticas nas cidades costeiras.",
+      "Agricultura sustentável e conservação ambiental."
+    ],
+    "saúde": [
+      "A influência da tecnologia na medicina moderna.",
+      "Saúde mental na era digital.",
+      "Avanços da biotecnologia e da genética.",
+      "O papel da nutrição na prevenção de doenças.",
+      "Uso ético da inteligência artificial na medicina."
+    ],
+    "história": [
+      "O impacto da Revolução Industrial na sociedade moderna.",
+      "Como a Segunda Guerra Mundial moldou o mundo atual.",
+      "A importância dos movimentos de independência no século XIX.",
+      "A influência da cultura japonesa na história contemporânea.",
+      "O papel das mulheres nas revoluções históricas."
+    ],
+    "sociedade": [
+      "Desigualdade social e educação no Brasil.",
+      "O impacto das mídias digitais nas relações humanas.",
+      "Empreendedorismo jovem e inovação social.",
+      "A importância da diversidade e inclusão nas empresas.",
+      "O papel da arte na transformação social."
+    ]
+  };
+
+  const lista = ideias[area] || ideias["geral"];
+  const sugestao = lista[Math.floor(Math.random() * lista.length)];
+  return `Aqui vai uma ideia de trabalho sobre <b>${area}</b>: <br><br>💡 <b>${sugestao}</b><br><br>Quer que eu te ajude a desenvolver o roteiro desse tema?`;
+}
+
+/* ------------------------
+   Botões / Submenu de Ideias
+   ------------------------*/
+btnIdeias.addEventListener("click", () => {
+  submenu.style.display = submenu.style.display === "none" || submenu.style.display === "" ? "block" : "none";
+});
+
+document.querySelectorAll(".subIdeia").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const area = btn.getAttribute("data-area");
+    submenu.style.display = "none";
+
+    // criar mensagem do usuário no chat
+    const userMsg = document.createElement("div");
+    userMsg.classList.add("message", "user");
+    userMsg.textContent = `Me dê uma ideia de trabalho sobre ${area}`;
+    chatMessages.appendChild(userMsg);
+    sendSound.currentTime = 0; sendSound.play();
+    registrarMensagem("user", `Me dê uma ideia de trabalho sobre ${area}`);
+
+    // mostra "digitando"
+    const typing = document.createElement("div");
+    typing.classList.add("message", "bot");
+    typing.innerHTML = "💬 Yuri está digitando <span class='typing'></span><span class='typing'></span><span class='typing'></span>";
+    chatMessages.appendChild(typing);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    setTimeout(() => {
+      typing.remove();
+      const resposta = gerarIdeiasPorArea(area);
+      const botMsg = document.createElement("div");
+      botMsg.classList.add("message", "bot");
+      botMsg.innerHTML = "💬 " + resposta;
+      chatMessages.appendChild(botMsg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      receiveSound.currentTime = 0; receiveSound.play();
+
+      registrarMensagem("bot", "💬 " + resposta);
+      salvarConversa();
+    }, 900);
+  });
+});
+
+/* ------------------------
+   Microfone (speech recognition)
+   ------------------------*/
+let recognition;
+if('webkitSpeechRecognition' in window){
+  recognition=new webkitSpeechRecognition();
+  recognition.lang="pt-BR";
+  recognition.continuous=false;
+  recognition.interimResults=false;
+  micButton.addEventListener("click",()=>{
+    if(micButton.classList.contains("active")){
+      recognition.stop();
+      micButton.classList.remove("active");
+    } else {
+      recognition.start();
+      micButton.classList.add("active");
+    }
+  });
+  recognition.onresult=(event)=>{
+    userInput.value=event.results[0][0].transcript;
+    sendMessage();
+  }
+  recognition.onend=()=>{micButton.classList.remove("active");}
+} else { micButton.style.display="none"; }
+
+/* ------------------------
+   Painéis: abrir/fechar com toggle
+   ------------------------*/
+function hidePanels() {
+  searchPanel.style.display="none";
+  settingsPanel.style.display="none";
+  historyPanel.style.display="none";
+  painelAtivo = null;
+}
+
+btnSearch.addEventListener("click", () => togglePainel(searchPanel, "pesquisa"));
+btnSettings.addEventListener("click", () => togglePainel(settingsPanel, "config"));
+btnHistory.addEventListener("click", () => togglePainel(historyPanel, "historico"));
+
+function togglePainel(painel, nome) {
+  if (painelAtivo === nome) {
+    hidePanels();
+    // deixar foco no chat
+  } else {
+    hidePanels();
+    painel.style.display = "block";
+    painelAtivo = nome;
+    if (nome === "pesquisa") {
+      // foco no campo de pesquisa
+      setTimeout(()=> searchInput.focus(), 120);
+    }
+  }
+}
+
+/* ------------------------
+   Pesquisar chat (no chat atual mostrado e no histórico)
+   - resultados clicáveis (abre conversa / navega direto)
+   - Enter abre o primeiro resultado
+   ------------------------*/
+function makeSearchResults(term){
+  searchResults.innerHTML="";
+  const q = (term||"").trim().toLowerCase();
+  if(q === "") return;
+
+  // 1) pesquisar no histórico (conversas salvas)
+  historico.forEach(chat=>{
+    // procurar se alguma mensagem da conversa contém o termo
+    const matchMsg = chat.mensagens.find(m=> (m.conteudo||"").toLowerCase().includes(q));
+    if(matchMsg){
+      const li=document.createElement("li");
+      li.style.padding="8px";
+      li.style.borderBottom="1px solid rgba(0,0,0,0.06)";
+      li.style.cursor="pointer";
+      li.innerHTML = `<strong>${chat.titulo}</strong><div style="font-size:13px; margin-top:6px; opacity:0.85;">${matchMsg.conteudo.replace(/<[^>]+>/g,'').substring(0,120)}...</div>`;
+      li.dataset.chatId = chat.id;
+      li.addEventListener("click", ()=>{
+        carregarConversa(chat.id);
+        hidePanels();
+      });
+      searchResults.appendChild(li);
+    }
+  });
+
+  // 2) pesquisar no chat atual visível
+  const msgs = [...chatMessages.querySelectorAll(".message")];
+  msgs.forEach((m, idx)=>{
+    if(m.textContent.toLowerCase().includes(q)){
+      const li=document.createElement("li");
+      li.style.padding="8px";
+      li.style.borderBottom="1px solid rgba(0,0,0,0.06)";
+      li.style.cursor="pointer";
+      li.textContent = m.textContent.replace(/\n/g," ").substring(0,140);
+      li.dataset.currentIndex = idx;
+      li.addEventListener("click", ()=>{
+        // ir diretamente para a mensagem no chat atual
+        const target = chatMessages.querySelectorAll(".message")[idx];
+        if(target){
+          // garante que o chat atual esteja visível (não carregando outra conversa)
+          // highlight temporário:
+          target.scrollIntoView({behavior:'smooth', block:'center'});
+          target.style.transition = "box-shadow 0.3s";
+          const old = target.style.boxShadow;
+          target.style.boxShadow = "0 0 18px rgba(255,200,0,0.9)";
+          setTimeout(()=> target.style.boxShadow = old, 1800);
+          hidePanels();
+        }
+      });
+      searchResults.appendChild(li);
+    }
+  });
+
+  // mensagem se nada encontrado
+  if(searchResults.children.length === 0){
+    const li=document.createElement("li");
+    li.textContent = "Nenhum resultado encontrado.";
+    li.style.opacity = 0.7;
+    li.style.padding = "8px";
+    searchResults.appendChild(li);
+  }
+}
+
+searchInput.addEventListener("input", (e)=>{
+  makeSearchResults(e.target.value);
+});
+
+// abrir primeiro resultado com Enter
+searchInput.addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){
+    e.preventDefault();
+    const first = searchResults.querySelector("li");
+    if(first){
+      first.click();
+    }
+  }
+});
+
+/* ------------------------
+   Exportar histórico e limpar
+   ------------------------*/
+btnExportarTXT.addEventListener("click", () => {
+  if (historico.length === 0) { alert("Nenhuma conversa para exportar!"); return; }
+  let conteudo = "=== Histórico do Chat Yuri ===\n\n";
+  historico.forEach((chat, i) => {
+    conteudo += `🗂️ Conversa ${i + 1}: ${chat.titulo}\n`;
+    chat.mensagens.forEach(m => {
+      conteudo += `${m.role === "user" ? "👤 Usuário" : "🤖 Yuri"}: ${m.conteudo.replace(/<[^>]+>/g, "")}\n`;
+    });
+    conteudo += "\n-------------------------------\n\n";
+  });
+  const blob = new Blob([conteudo], { type: "text/plain;charset=utf-8" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "historico_yuri.txt";
+  link.click();
+});
+
+btnExportarJSON.addEventListener("click", () => {
+  if (historico.length === 0) { alert("Nenhuma conversa para exportar!"); return; }
+  const blob = new Blob([JSON.stringify(historico, null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "historico_yuri.json";
+  link.click();
+});
+
+btnLimparHistorico.addEventListener("click", () => {
+  if (confirm("Tem certeza que deseja apagar todo o histórico de conversas? Esta ação não pode ser desfeita.")) {
+    historico = [];
+    localStorage.removeItem("yuriHistorico");
+    atualizarListaHistorico();
+    alert("🧹 Histórico limpo com sucesso!");
+  }
+});
+
+/* ------------------------
+   Tutorial
+   - adicionei o passo sobre o botão de ideias conforme solicitado
+   ------------------------*/
+const tutorialSteps = [
+  {user:["Me fale como posso usar o chat"], yuri:"Ah, é simples! É só conversar comigo, e enviar apertando no botão ou clicando nesse botão azul de seta branca, eu vou lhe responder da forma adequada!"},
+  {user:["E se eu quiser achar uma conversa que eu tive com você?"], yuri:"Fácil demais! Clica na lupa escrito 'Pesquisa' no menu lateral e digite a palavra chave que você se lembrar!"},
+  {user:["E se eu quiser procurar manualmente?"], yuri:"Apertando no relógio escrito 'Histórico' você encontra manualmente todas as suas conversas e pode apagar pra economizar espaço!"},
+  {user:["E se eu quiser um chat limpo?"], yuri:"Fácil! Clicando em 'Novo Chat' que tem o símbolo de mais, você ganha uma conversa nova e limpa automaticamente!"},
+  {user:["O que significa essas três barras ao lado do seu nome?"], yuri:"Ah! Elas escondem para tela cheia e garantir foco, mas elas reaparecem de novo quando são clicadas."},
+  {user:["Estou curioso sobre você!"], yuri:"Sério? Bem! É... Então pergunte coisas saudáveis sobre mim que eu vou responder com carinho!"},
+  {user:["Do que você gosta de falar"], yuri:"Você pode perguntar o significado do meu nome, a minha idade, minha nacionalidade, do que eu gosto, meus hobbies, minha música favorita, minha comida favorita, minha cor favorita, quem me criou, quem criou a Creativa. Simples assim!"},
+  {user:["Ouvi dizer que tem a opção de ditado, mas não o vejo"], yuri:"É por conta que você desativou ou negou as permissões de acesso ao seu microfone, ou simplesmente seu navegador ou aparelho não tem suporte a essa função. Recomendo verificar isso nas configurações, atualizar a página ou o navegador, se der certo vai aparecer um botão azul de microfone ao lado esquerdo do botão de enviar."},
+
+  /* --- NOVO PASSO ADICIONADO (pedido seu) --- */
+  {user:["E esse botão de ideias?"], yuri:"Clicando nele você vê todos os tópicos que quiser, e clicando nos tópicos eu digo um tema aleatório e te ajudo a montar um roteiro! não é demais?"}
+];
+
+let tutorialIndex=0;
+const tutorialContent=document.getElementById("tutorialContent");
+const nextBtn=document.getElementById("nextStepBtn");
+const replayBtn=document.getElementById("replayTutorialBtn");
+const tutorialSound=document.getElementById("tutorialSound");
+
+function showStep(index){
+  tutorialContent.innerHTML="";
+  const step=tutorialSteps[index];
+  step.user.forEach(u=>{
+    const userDiv=document.createElement("div");
+    userDiv.style.opacity=0; userDiv.textContent="Usuário: "+u; userDiv.style.margin="8px 0"; userDiv.style.transition="opacity 0.5s";
+    tutorialContent.appendChild(userDiv);
+    setTimeout(()=>{userDiv.style.opacity=1;},100);
+  });
+  const yuriDiv=document.createElement("div");
+  yuriDiv.style.opacity=0; yuriDiv.style.margin="12px 0";
+  yuriDiv.innerHTML="Yuri está digitando <span class='typing'></span><span class='typing'></span><span class='typing'></span>";
+  tutorialContent.appendChild(yuriDiv);
+  tutorialSound.currentTime=0; tutorialSound.play();
+  setTimeout(()=>{
+    yuriDiv.innerHTML="Yuri: "+step.yuri;
+    yuriDiv.style.transition="opacity 0.5s"; yuriDiv.style.opacity=1;
+    tutorialSound.currentTime=0; tutorialSound.play();
+  },1200);
+}
+
+document.getElementById("btnTutorial").onclick=()=>{
+  tutorialIndex=0; replayBtn.style.display="none"; nextBtn.style.display="inline-block";
+  openModal("modalTutorial"); showStep(tutorialIndex);
+};
+nextBtn.onclick=()=>{
+  tutorialIndex++;
+  if(tutorialIndex>=tutorialSteps.length){
+    nextBtn.style.display="none"; replayBtn.style.display="inline-block";
+    tutorialContent.innerHTML="<div>✨ Tutorial concluído! Use o chat à vontade! ✨</div>";
+  } else { showStep(tutorialIndex); }
+};
+replayBtn.onclick=()=>{tutorialIndex=0; replayBtn.style.display="none"; nextBtn.style.display="inline-block"; showStep(tutorialIndex);}
+function openModal(id){document.getElementById(id).style.display="flex";}
+function closeModal(id){document.getElementById(id).style.display="none";}
+
+/* ------------------------
+   Créditos: abrir/fechar, reiniciar animação
+   ------------------------*/
+btnCreditos.addEventListener("click", ()=>{
+  creditsModal.style.display = "flex";
+  // reiniciar animação forçando reflow
+  creditsRoll.style.animation = "none";
+  void creditsRoll.offsetWidth;
+  creditsRoll.style.animation = null; // animação volta ao definido no CSS
+});
+
+closeCreditsBtn.addEventListener("click", ()=> { creditsModal.style.display="none"; });
+
+creditsModal.addEventListener("click", (e)=>{
+  if(e.target === creditsModal) creditsModal.style.display = "none";
+});
+
+/* ------------------------
+   Outros...
+   ------------------------*/
+</script>
+</body>
+</html>
